@@ -3,6 +3,17 @@ import "./style.css";
 
 export default function App() {
   return (
+    <>
+  <header>
+  <div className='menu'>
+    <div className='options'><a href='#'>მთავარი</a></div>
+    <div className='options'><a href='#' >პროდუქცია</a></div>
+    <div className='options'><a href='#' >მიწოდების სერვისი</a></div>
+    <div className='options'><a href='#' >ჩვენ შესახებ</a></div>
+    <div className='options'><a href='#' >საკონტაქტო ინფორმაცია</a></div>
+   </div>
+  </header>
+
     <div className='main'>
    {[...Array(2)].map((e, i) =>(
     <>
@@ -45,5 +56,6 @@ export default function App() {
   ))}
       
     </div>
+  </>
   );
 }
