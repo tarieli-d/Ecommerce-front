@@ -4,6 +4,8 @@ import "./style.css";
 export default function App() {
   return (
     <div className='main'>
+   {[...Array(2)].map((e, i) =>(
+    <>
       <div className="product">
           
       <div className="top"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUC-_2I4_775RSeEIHfXH909ZeQw-7-fzucMuMqrI-O_GeIwZrIJwr9iyTCpTdOsc3_90&usqp=CAU"></img></div>
@@ -39,9 +41,9 @@ export default function App() {
       <div className='bottom'><button>Buy it</button>
       </div>
       </div> 
+    </>  
+  ))}
       
-
-
     </div>
   );
 }
