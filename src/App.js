@@ -54,8 +54,10 @@ export default function App() {
       </div> 
     </>  
   ))}
-      
+
     </div>
+
+    <footer><div className='copyright'>©2021 ყველა უფლება დაცულია. ტარიელ დუიშვილი </div></footer>
   </>
   );
 }
