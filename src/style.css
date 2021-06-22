@@ -36,8 +36,16 @@ img{
 .bottom{
   height: 40%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: rgb(106, 91, 161);
+}
+
+.bottom span{
+  text-decoration: underline;
 }
 .bottom button{
   font-size: 25px;
