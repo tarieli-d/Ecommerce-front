@@ -15,7 +15,7 @@ import About from "./components/About.js";
 const App=()=>{
   return (
     <Router>
-    <div>
+
   <header>
   <div className='menu'>
     <div className='options'><Link to="/">მთავარი</Link></div>
@@ -26,8 +26,7 @@ const App=()=>{
    </div>
   </header>
 
-  <Switch>
-         
+      <Switch>
           <Route path="/products">
             <Products />
           </Route>
@@ -40,13 +39,23 @@ const App=()=>{
           <Route path="/contact">
             <Contact />
           </Route>
+          <Route path="/">
+            <Main />
+          </Route>
         </Switch>
 
     <footer><div className='copyright'>©2021 ყველა უფლება დაცულია. ტარიელ დუიშვილი </div></footer>
    
-    
-  </div>
+  
   </Router>
   );
 }
 export default App;
+
+
+export const Main=()=>{
+  return(
+    <div className='main'><img src='https://www.coronainsights.com/wp-content/uploads/2014/11/Welcome.jpg'/>
+    </div>
+  );
+}

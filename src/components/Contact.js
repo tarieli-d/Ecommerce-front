@@ -5,7 +5,7 @@ const Products = () =>{
   return (
 
      <div>
-        <div className="footerTop-left">
+        <div className='common'>
             <div>
               <i className="fa fa-map-marker"></i>
               <p>
