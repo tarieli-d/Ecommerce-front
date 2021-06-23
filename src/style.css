@@ -55,15 +55,15 @@ a{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 700;
 }
-
+/*
 .popupWindow{
   position: absolute;
+  left: 50vw;
+  top: 50vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin:auto;
-  top:auto;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 900;
   width: 300px;
@@ -77,17 +77,40 @@ a{
 .popupWindow .close{
   align-self: flex-start;
   transform: scale(2);
-}
+}*/
 
 
 .product {
+  position: relative;
   display: flex;
   flex-direction: column;
   font-family: Lato;
   width: 200px;
   height: 300px;
   box-shadow: 0 2px 0.3rem 0.1rem rgb(199, 194, 187);
+  transition: 2s;
+  transform-style: preserve-3d;
+  background: white;
+  pointer-events: none;
 }
+.product::before{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform: rotateY(180deg);
+  content: "Call us : 555-65-77-08";
+  background: rgb(22, 22, 22);
+  color: white;
+}
+.product:hover{
+  transform: rotateY(180deg);
+}
+
 .top{
   display: flex;
   justify-content: center;
@@ -131,6 +154,7 @@ img{
   border:none;
   outline: none;
   cursor:pointer;
+  pointer-events: auto;
 }
 
 .bottom button:hover{
