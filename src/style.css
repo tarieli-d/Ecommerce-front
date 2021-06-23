@@ -38,12 +38,14 @@ a{
 }
 .main{
   width: 80%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
   row-gap: 2rem;
   margin: auto;
+  padding-bottom: 10rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  justify-content: space-between;
 }
+
 .common{
   display: flex;
   flex-direction: column;
@@ -53,6 +55,31 @@ a{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 700;
 }
+
+.popupWindow{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+  top:auto;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 900;
+  width: 300px;
+  height: 400px;
+  background: rgb(14, 13, 14);
+  color: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 0.3rem 0.1rem rgb(199, 194, 187); 
+}
+
+.popupWindow .close{
+  align-self: flex-start;
+  transform: scale(2);
+}
+
+
 .product {
   display: flex;
   flex-direction: column;
@@ -61,7 +88,6 @@ a{
   height: 300px;
   box-shadow: 0 2px 0.3rem 0.1rem rgb(199, 194, 187);
 }
-
 .top{
   display: flex;
   justify-content: center;
@@ -121,7 +147,6 @@ footer{
   height: 5rem;
   background: rgb(54, 53, 53);
   color: rgb(202, 199, 199);
-  margin-top: 1rem;
 }
 .copyright{
   font-weight: 900;

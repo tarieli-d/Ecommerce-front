@@ -1,16 +1,25 @@
-import React from "react";
+import React,{useState} from "react";
 import "../style.css";
 
 const Products = () =>{
+  const [popupWindow,SetPopupWindow]=useState('none');
+  const Style={
+    display:popupWindow
+  }
+  const showWindow=()=>{
+     SetPopupWindow('flex');
+  }
+
   return (
 
     <div className='main'>
+    <div className='popupWindow' style={Style}><div>Call this number: 555 65 77 08</div><div className='close'>x</div></div>
    {[...Array(2)].map((e, i) =>(
     <>
       <div className="product">
           
       <div className="top"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUC-_2I4_775RSeEIHfXH909ZeQw-7-fzucMuMqrI-O_GeIwZrIJwr9iyTCpTdOsc3_90&usqp=CAU"></img></div>
-          <div className='bottom'><span>50 ლარი</span><button>ყიდვა </button></div>
+          <div className='bottom'><span>50 ლარი</span><button onClick={showWindow}>ყიდვა </button></div>
       </div>
 
       <div className="product">
