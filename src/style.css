@@ -2,7 +2,14 @@ body{
   padding: 0;
   margin:0;
 }
+#root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 header{
+
   display:flex;
   align-items: center;
   width: 100%;
@@ -37,21 +44,21 @@ a{
   font-weight: 600;
 }
 .main{
+  flex: auto;
   width: 80%;
-  row-gap: 2rem;
-  margin: auto;
-  padding-bottom: 10rem;
+  padding-bottom: 5rem;
   display: grid;
+  row-gap: 2rem;
   grid-template-columns: repeat(auto-fill, 200px);
   justify-content: space-between;
 }
 
 .common{
+  flex: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 700;
 }
@@ -162,11 +169,10 @@ img{
 }
 
 footer{
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  bottom: 0;
   width: 100%;
   height: 5rem;
   background: rgb(54, 53, 53);

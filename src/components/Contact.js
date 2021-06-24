@@ -3,7 +3,7 @@ import "../style.css";
 
 const Products = () => {
   return (
-    <div>
+    <>
       <div className="common">
         <div>
           <i className="fa fa-map-marker"></i>
@@ -22,7 +22,7 @@ const Products = () => {
           <p>t_duishvili@cu.edu.ge</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Products;
