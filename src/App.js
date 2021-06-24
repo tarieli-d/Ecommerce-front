@@ -12,15 +12,14 @@ const App = () => {
    /**open left side navbar or close it*/
    const openCloseNav = (e) => {
     e.stopPropagation();
-    if (e.target.className !== "closebtn") setSidenavWidth("350px");
+    if (e.target.className !== "closebtn") setSidenavWidth("300px");
     else setSidenavWidth("0px");
   };
   return (
     <Router>
-      <header>
       <SideNav arr={[sidenavWidth,openCloseNav]} />
-
-      <div className='menu'>
+      <header>
+      
       <div
           className="alignIconWithTextInRightNav"
           onClick={openCloseNav}
@@ -28,6 +27,8 @@ const App = () => {
         >
           <FaBars />
        </div>
+       <div className="logo">Welcome,nice to see you here</div>
+       <div className='menu'>
         <Menu/>
       </div>
       </header>

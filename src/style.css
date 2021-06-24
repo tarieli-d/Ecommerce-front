@@ -10,18 +10,28 @@ body{
 }
 header{
   display:flex;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
   height: 8rem;
-  background-color: black;
-  opacity: .9;
+  background-color: rgb(28, 27, 66);
   margin-bottom: 1rem; 
   z-index: 1;
 }
 
+/*logo*/
+.logo{
+  position: absolute;
+  top: 0;
+  left: 40%;
+  color: white;
+  font: 1rem cursive;
+  background: rgb(184, 135, 63);
+  padding: 0.5rem;
+}
+
 /*sidebar navigation*/
 .sidenav {
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -32,7 +42,7 @@ header{
   background-color:/*rgb(36, 34, 34)*/ black;
   overflow: hidden;
   transition: 0.6s;
-  z-index: 55;
+  z-index: 2;
   opacity: 1;
 }
 .sidenav div{
@@ -77,6 +87,7 @@ header{
 }
 
 #menuIcon {
+  align-self: center;
   color: white;
   background-color: transparent;
   width: 5%;
@@ -91,13 +102,14 @@ header{
 /*straight menu */
 header .menu{
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
-  width: 70%;
-  height: 30%;
+  column-gap: 1rem;
+  width: 90%;
+  height: 50%;
 }
 header .menu div{
-  background:rgb(232, 238, 223);
+  background:rgb(230, 231, 228);
   padding: 1rem;
   box-sizing: border-box;
   border-radius: 0.2rem;
@@ -253,4 +265,16 @@ footer{
 }
 .copyright{
   font-weight: 900;
+}
+
+
+
+
+@media (max-width: 900px) {
+header .menu{
+  display: none;
+}
+header #menuIcon{
+  width: 10%;
+}
 }
