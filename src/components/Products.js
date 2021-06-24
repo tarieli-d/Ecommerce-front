@@ -1,21 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "../style.css";
 
 const Products = () => {
-  const [popupWindow, SetPopupWindow] = useState("none");
-  const Style = {
-    display: popupWindow,
-  };
-  /*const showWindow = () => {
-    SetPopupWindow("flex");
-  };*/
 
   return (
     <>
-      <div className="popupWindow" style={Style}>
-        <div>Call this number: 555 65 77 08</div>
-        <div className="close">x</div>
-      </div>
       <div className="main">
         {[...Array(2)].map((e, i) => (
           <>

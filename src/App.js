@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { FaSearch, FaAngleDown, FaAngleUp, FaBars } from "react-icons/fa";
+import { FaSearch,FaBars,FaUserAlt } from "react-icons/fa";
 import "./style.css";
 import Products from "./components/Products";
 import Contact from "./components/Contact.js";
@@ -9,28 +9,36 @@ import About from "./components/About.js";
 
 const App = () => {
   const [sidenavWidth, setSidenavWidth] = useState("0px");
-   /**open left side navbar or close it*/
-   const openCloseNav = (e) => {
+  /**open left side navbar or close it*/
+  const openCloseNav = (e) => {
     e.stopPropagation();
     if (e.target.className !== "closebtn") setSidenavWidth("300px");
     else setSidenavWidth("0px");
   };
   return (
     <Router>
-      <SideNav arr={[sidenavWidth,openCloseNav]} />
+      <SideNav arr={[sidenavWidth, openCloseNav]} />
       <header>
-      
-      <div
-          className="alignIconWithTextInRightNav"
-          onClick={openCloseNav}
-          id="menuIcon"
-        >
-          <FaBars />
-       </div>
-       <div className="logo">Welcome,nice to see you here</div>
-       <div className='menu'>
-        <Menu/>
-      </div>
+        <div className="headerTop">
+          <div id="menuIcon">
+            <FaBars onClick={openCloseNav} />
+            <span>MyShop</span>
+          </div>
+
+          <div id="searchBar">
+            <span>
+              <input placeholder="Search.." />
+              <FaSearch className="searchIcon" />
+            </span>
+          </div>
+
+          <div id="user">
+        <FaUserAlt/>
+        </div>
+        </div>
+        <div className="menu">
+          <Menu />
+        </div>
       </header>
 
       <Switch>
@@ -69,57 +77,42 @@ export const Main = () => {
   );
 };
 
-
 export const SideNav = (props) => {
   const styles = {
     width: props.arr[0],
   };
 
   return (
-    <div  className="sidenav" style={styles}>
+    <div className="sidenav" style={styles}>
       <div id="closeIcon">
         <a className="closebtn" onClick={props.arr[1]}>
           &times;
         </a>
       </div>
       {/**This component is used two times with different arguments in header,here and below */}
-      <Menu/>
+      <Menu />
     </div>
   );
 };
-
-
-
-
-
-
-
-import { Link } from "react-router-dom";
-import {
-  FaIdCard,
-  FaCamera,
-  FaBookOpen,
-  FaHome,
-} from "react-icons/fa";
 
 const Menu = () => {
   return (
     <>
       <div className="options">
-            <Link to="/">მთავარი</Link>
-          </div>
-          <div className="options">
-            <Link to="/products">პროდუქცია</Link>
-          </div>
-          <div className="options">
-            <Link to="/delivery">მიწოდების სერვისი</Link>
-          </div>
-          <div className="options">
-            <Link to="/about">ჩვენ შესახებ</Link>
-          </div>
-          <div className="options">
-            <Link to="/contact">საკონტაქტო ინფორმაცია</Link>
-          </div>
+        <Link to="/">მთავარი</Link>
+      </div>
+      <div className="options">
+        <Link to="/products">პროდუქცია</Link>
+      </div>
+      <div className="options">
+        <Link to="/delivery">მიწოდების სერვისი</Link>
+      </div>
+      <div className="options">
+        <Link to="/about">ჩვენ შესახებ</Link>
+      </div>
+      <div className="options">
+        <Link to="/contact">საკონტაქტო ინფორმაცია</Link>
+      </div>
     </>
   );
 };
