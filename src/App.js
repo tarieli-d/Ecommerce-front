@@ -96,25 +96,31 @@ export const SideNav = (props) => {
 };
 
 const Menu = () => {
+  const [activeMenuOption,setActiveMenuOption]=useState(-1);
+  const Border='border-bottom';
+  const Style= {
+    /*'borderBottom': '3px solid rgb(35, 167, 75)'*/
+    'background':'rgb(9, 133, 71)'
+  }
   return (
     <>
-       <Link to="/"><div className="options">
-       მთავარი
+       <Link to="/" style={activeMenuOption==0?Style:{}} onClick={()=>{setActiveMenuOption(0)}}><div className="options">
+        მთავარი
       </div>
       </Link>
-      <Link to="/products">
+      <Link to="/products" style={activeMenuOption==1?Style:{}}onClick={()=>{setActiveMenuOption(1)}}>
       <div className="options">
-       პროდუქცია
+        პროდუქცია
       </div></Link>
-      <Link to="/delivery">
+      <Link to="/delivery" style={activeMenuOption==2?Style:{}}onClick={()=>{setActiveMenuOption(2)}}>
       <div className="options">
         მიწოდების სერვისი
       </div></Link>
-      <Link to="/about">
+      <Link to="/about" style={activeMenuOption==3?Style:{}} onClick={()=>{setActiveMenuOption(3)}}>
       <div className="options">
         ჩვენ შესახებ
       </div></Link>
-      <Link to="/contact">
+      <Link to="/contact" style={activeMenuOption==4?Style:{}} onClick={()=>{setActiveMenuOption(4)}}>
       <div className="options">
         საკონტაქტო ინფორმაცია
       </div></Link>
