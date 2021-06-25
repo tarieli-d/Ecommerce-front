@@ -12,7 +12,7 @@ const App = () => {
   /**open left side navbar or close it*/
   const openCloseNav = (e) => {
     e.stopPropagation();
-    if (e.target.className !== "closebtn") setSidenavWidth("300px");
+    if (e.currentTarget.className != "closebtn") setSidenavWidth("300px");
     else setSidenavWidth("0px");
   };
   return (
@@ -84,11 +84,11 @@ export const SideNav = (props) => {
 
   return (
     <div className="sidenav" style={styles}>
-      <div id="closeIcon">
-        <a className="closebtn" onClick={props.arr[1]}>
+     <a className="closebtn" onClick={props.arr[1]}>
+      <div id="closeIcon"> 
           &times;
-        </a>
       </div>
+      </a>
       {/**This component is used two times with different arguments in header,here and below */}
       <Menu />
     </div>
@@ -98,21 +98,26 @@ export const SideNav = (props) => {
 const Menu = () => {
   return (
     <>
-      <div className="options">
-        <Link to="/">მთავარი</Link>
+       <Link to="/"><div className="options">
+       მთავარი
       </div>
+      </Link>
+      <Link to="/products">
       <div className="options">
-        <Link to="/products">პროდუქცია</Link>
-      </div>
+       პროდუქცია
+      </div></Link>
+      <Link to="/delivery">
       <div className="options">
-        <Link to="/delivery">მიწოდების სერვისი</Link>
-      </div>
+        მიწოდების სერვისი
+      </div></Link>
+      <Link to="/about">
       <div className="options">
-        <Link to="/about">ჩვენ შესახებ</Link>
-      </div>
+        ჩვენ შესახებ
+      </div></Link>
+      <Link to="/contact">
       <div className="options">
-        <Link to="/contact">საკონტაქტო ინფორმაცია</Link>
-      </div>
+        საკონტაქტო ინფორმაცია
+      </div></Link>
     </>
   );
 };
