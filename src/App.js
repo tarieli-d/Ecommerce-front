@@ -9,6 +9,14 @@ import About from "./components/About.js";
 
 const App = () => {
   const [sidenavWidth, setSidenavWidth] = useState("0px");
+  const [products,setProduct]=useState([]);
+
+  function addProduct(arg) {d
+    console.log(products)
+    let product={'imgUrl':arg[0],'price':arg[1]};
+    setProduct([...products, product]);
+  }
+
   /**open left side navbar or close it*/
   const openCloseNav = (e) => {
     e.stopPropagation();
@@ -33,15 +41,19 @@ const App = () => {
           </div>
 
           <div id="user">
-        <FaUserAlt/>
-        </div>
-        </div>
-        <div className="menu">
+            <Link to='/admin'><FaUserAlt/>
+            </Link>
+          </div>
+         </div>
+         <div className="menu">
           <Menu />
-        </div>
+         </div>
       </header>
 
       <Switch>
+      <Route path="/admin">
+          <Admin addProduct={addProduct} />
+        </Route>
         <Route path="/products">
           <Products />
         </Route>
@@ -68,6 +80,32 @@ const App = () => {
   );
 };
 export default App;
+
+export const Admin = (props) => {
+  const [imgUrl,setImgUrl]=useState('');
+  const [price,setPrice]=useState('');
+  function handleChange(e) {
+    let val=e.currentTarget.value;
+    if(e.currentTarget.className=='url')
+      setImgUrl(val);
+    else
+      setPrice(val);
+  }
+  return (
+    <div className="common">
+      <form onSubmit={(e)=>{e.preventDefault();props.addProduct([imgUrl,price])}}>
+        <input className='url'  onChange={handleChange} 
+        value={imgUrl} placeholder='img url..'/>
+        <input className='price' onChange={handleChange} 
+        value={price} placeholder='price..'/>
+        <button>დამატება</button>
+      </form>
+
+    </div>
+  );
+};
+
+
 
 export const Main = () => {
   return (
