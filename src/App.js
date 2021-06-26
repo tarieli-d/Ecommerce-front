@@ -41,9 +41,10 @@ const App = () => {
             </span>
           </div>
 
-          <div id="user">
+          <div id="admin">
             <Link to="/admin">
               <FaUserAlt />
+              <span>Admin</span>
             </Link>
           </div>
         </div>

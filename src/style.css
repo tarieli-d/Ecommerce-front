@@ -104,13 +104,25 @@ input {
   transform: translate(0px, -12px);
   font-size: 0.8rem;
 }
-#user{
-  display: flex;
-  align-items: center;
-  width: 3%;
+#admin{
+  width: 12%;
   height: 70%;
-  font-size: 1.8rem;
+}
+#admin a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 80%;
+  column-gap: 0.1rem;
+  font-size: 1.2rem;
+  font-family: 'Franklin G othic Medium', 'Arial Narrow', Arial, sans-serif;
   color: white;
+  background: rgb(9, 64, 100);
+}
+#admin a span{
+  font-size: 1.6rem;
+  height: 70%;
 }
 /*sidebar navigation*/
 .sidenav {
@@ -337,16 +349,19 @@ footer{
   .headerTop #searchBar span{
       width: 95%;
  }
- .headerTop #user{
-       width: 10%;
+ .headerTop #admin{
+       width: 28%;
        
  }
 }
-@media (max-width: 400px) {
+@media (max-width: 450px) {
+  header{
+      height: 10rem;
+  }
   .headerTop{
-      margin-top: 1rem;
+      height: 100%;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
  }
   header #menuIcon{
@@ -358,11 +373,9 @@ footer{
   header #searchBar span{
       width: 95%;
  }
- .headerTop #user{
-   width: 15%;
-   height: 25%;
+ .headerTop #admin{
+   width: 50%;
    transform: scale(0.8);
-   margin-top: 0.4rem;
  }
 .headerTop div{
   margin: 0.1rem;
