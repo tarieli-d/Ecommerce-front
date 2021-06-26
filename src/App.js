@@ -94,24 +94,24 @@ export const Admin = (props) => {
     else setPrice(val);
   }
   return (
-    <div>
+    <div className='common'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           props.addProduct([imgUrl, price]);
         }}
-      >
+      ><label>პროდუქტის დამატება</label>
         <input
           className="url"
           onChange={handleChange}
           value={imgUrl}
-          placeholder="img url.."
+          placeholder="Image url"
         />
         <input
           className="price"
           onChange={handleChange}
           value={price}
-          placeholder="price.."
+          placeholder="Price"
         />
         <button>დამატება</button>
       </form>
