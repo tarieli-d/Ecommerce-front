@@ -84,6 +84,7 @@ const App = () => {
 };
 export default App;
 
+
 export const Admin = (props) => {
   const [imgUrl, setImgUrl] = useState("");
   const [price, setPrice] = useState("");
@@ -93,7 +94,7 @@ export const Admin = (props) => {
     else setPrice(val);
   }
   return (
-    <div className="common">
+    <div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -138,6 +139,11 @@ export const SideNav = (props) => {
       </a>
       {/**This component is used two times with different arguments in header,here and below */}
       <Menu />
+      <Link to="/admin">
+        <div>
+          <span>ადმინის პანელი</span>
+        </div>
+      </Link>   
     </div>
   );
 };
