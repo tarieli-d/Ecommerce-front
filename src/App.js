@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { FaSearch,FaBars,FaUserAlt } from "react-icons/fa";
+import { FaSearch, FaBars, FaUserAlt } from "react-icons/fa";
 import "./style.css";
 import Products from "./components/Products";
 import Contact from "./components/Contact.js";
 import Delivery from "./components/Delivery.js";
 import About from "./components/About.js";
+import productsArray from "./components/constants.js";
 
 const App = () => {
   const [sidenavWidth, setSidenavWidth] = useState("0px");
+  const [products, setProduct] = useState(productsArray);
+
+  function addProduct(arg) {
+    console.log(products);
+    let product = { imgUrl: arg[0], price: arg[1] };
+    setProduct([...products, product]);
+  }
+
   /**open left side navbar or close it*/
   const openCloseNav = (e) => {
     e.stopPropagation();
@@ -32,9 +41,12 @@ const App = () => {
             </span>
           </div>
 
-          <div id="user">
-        <FaUserAlt/>
-        </div>
+          <div id="admin">
+            <Link to="/admin">
+              <FaUserAlt />
+              <span>Admin</span>
+            </Link>
+          </div>
         </div>
         <div className="menu">
           <Menu />
@@ -42,8 +54,11 @@ const App = () => {
       </header>
 
       <Switch>
+        <Route path="/admin">
+          <Admin addProduct={addProduct} />
+        </Route>
         <Route path="/products">
-          <Products />
+          <Products products={products} />
         </Route>
         <Route path="/delivery">
           <Delivery />
@@ -69,6 +84,41 @@ const App = () => {
 };
 export default App;
 
+
+export const Admin = (props) => {
+  const [imgUrl, setImgUrl] = useState("");
+  const [price, setPrice] = useState("");
+  function handleChange(e) {
+    let val = e.currentTarget.value;
+    if (e.currentTarget.className == "url") setImgUrl(val);
+    else setPrice(val);
+  }
+  return (
+    <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          props.addProduct([imgUrl, price]);
+        }}
+      >
+        <input
+          className="url"
+          onChange={handleChange}
+          value={imgUrl}
+          placeholder="img url.."
+        />
+        <input
+          className="price"
+          onChange={handleChange}
+          value={price}
+          placeholder="price.."
+        />
+        <button>დამატება</button>
+      </form>
+    </div>
+  );
+};
+
 export const Main = () => {
   return (
     <div className="common">
@@ -84,46 +134,74 @@ export const SideNav = (props) => {
 
   return (
     <div className="sidenav" style={styles}>
-     <a className="closebtn" onClick={props.arr[1]}>
-      <div id="closeIcon"> 
-          &times;
-      </div>
+      <a className="closebtn" onClick={props.arr[1]}>
+        <div id="closeIcon">&times;</div>
       </a>
       {/**This component is used two times with different arguments in header,here and below */}
       <Menu />
+      <Link to="/admin">
+        <div>
+          <span>ადმინის პანელი</span>
+        </div>
+      </Link>   
     </div>
   );
 };
 
 const Menu = () => {
-  const [activeMenuOption,setActiveMenuOption]=useState(-1);
-  const Border='border-bottom';
-  const Style= {
+  const [activeMenuOption, setActiveMenuOption] = useState(-1);
+  const Border = "border-bottom";
+  const Style = {
     /*'borderBottom': '3px solid rgb(35, 167, 75)'*/
-    'background':'rgb(9, 133, 71)'
-  }
+    background: "rgb(12, 136, 185)",
+  };
   return (
     <>
-       <Link to="/" style={activeMenuOption==0?Style:{}} onClick={()=>{setActiveMenuOption(0)}}><div className="options">
-        მთავარი
-      </div>
+      <Link
+        to="/"
+        style={activeMenuOption == 0 ? Style : {}}
+        onClick={() => {
+          setActiveMenuOption(0);
+        }}
+      >
+        <div className="options">მთავარი</div>
       </Link>
-      <Link to="/products" style={activeMenuOption==1?Style:{}}onClick={()=>{setActiveMenuOption(1)}}>
-      <div className="options">
-        პროდუქცია
-      </div></Link>
-      <Link to="/delivery" style={activeMenuOption==2?Style:{}}onClick={()=>{setActiveMenuOption(2)}}>
-      <div className="options">
-        მიწოდების სერვისი
-      </div></Link>
-      <Link to="/about" style={activeMenuOption==3?Style:{}} onClick={()=>{setActiveMenuOption(3)}}>
-      <div className="options">
-        ჩვენ შესახებ
-      </div></Link>
-      <Link to="/contact" style={activeMenuOption==4?Style:{}} onClick={()=>{setActiveMenuOption(4)}}>
-      <div className="options">
-        საკონტაქტო ინფორმაცია
-      </div></Link>
+      <Link
+        to="/products"
+        style={activeMenuOption == 1 ? Style : {}}
+        onClick={() => {
+          setActiveMenuOption(1);
+        }}
+      >
+        <div className="options">პროდუქცია</div>
+      </Link>
+      <Link
+        to="/delivery"
+        style={activeMenuOption == 2 ? Style : {}}
+        onClick={() => {
+          setActiveMenuOption(2);
+        }}
+      >
+        <div className="options">მიწოდების სერვისი</div>
+      </Link>
+      <Link
+        to="/about"
+        style={activeMenuOption == 3 ? Style : {}}
+        onClick={() => {
+          setActiveMenuOption(3);
+        }}
+      >
+        <div className="options">ჩვენ შესახებ</div>
+      </Link>
+      <Link
+        to="/contact"
+        style={activeMenuOption == 4 ? Style : {}}
+        onClick={() => {
+          setActiveMenuOption(4);
+        }}
+      >
+        <div className="options">საკონტაქტო ინფორმაცია</div>
+      </Link>
     </>
   );
 };
