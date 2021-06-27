@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { FaSearch, FaBars, FaUserAlt } from "react-icons/fa";
+import { FaSearch, FaBars, FaUserAlt,FaLink,FaMoneyBillAlt} from "react-icons/fa";
 import "./style.css";
 import Products from "./components/Products";
 import Contact from "./components/Contact.js";
@@ -39,7 +39,7 @@ const App = () => {
         <div className="headerTop">
           <div id="menuIcon">
             <FaBars onClick={openCloseNav} />
-            <span>MyShop</span>
+            <span>Wellcome</span>
           </div>
 
           <div id="searchBar">
@@ -111,18 +111,24 @@ export const Admin = (props) => {
         }}
       >
         <label>პროდუქტის დამატება</label>
+        <div>
+        {<FaLink/>}
         <input
           className="url"
           onChange={handleChange}
           value={imgUrl}
           placeholder="Image url"
         />
+        </div>
+        <div>
+        {<FaMoneyBillAlt/>}
         <input
           className="price"
           onChange={handleChange}
           value={price}
           placeholder="Price"
         />
+        </div>
         <button>დამატება</button>
       </form>
     </div>
