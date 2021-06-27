@@ -1,10 +1,14 @@
 import React from "react";
 import "../style.css";
 
-const About = () =>{
+const About = () => {
   return (
-   <div className='common'>We are Ecommerce company,which provides users with high reliability and quality products </div>
-    
+    <div className="common">
+      <div className="commonContent">
+        We are Ecommerce company,which provides users with high reliability and
+        quality products{" "}
+      </div>
+    </div>
   );
-}
+};
 export default About;

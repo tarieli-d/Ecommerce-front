@@ -9,11 +9,11 @@ import About from "./components/About.js";
 import productsArray from "./components/constants.js";
 
 const App = () => {
+  const [activeMenuOption, setActiveMenuOption] = useState(-1);
   const [sidenavWidth, setSidenavWidth] = useState("0px");
   const [products, setProduct] = useState(productsArray);
 
   function addProduct(arg) {
-    console.log(products);
     let product = { imgUrl: arg[0], price: arg[1] };
     setProduct([...products, product]);
   }
@@ -21,12 +21,20 @@ const App = () => {
   /**open left side navbar or close it*/
   const openCloseNav = (e) => {
     e.stopPropagation();
-    if (e.currentTarget.className != "closebtn") setSidenavWidth("300px");
+    if (e.currentTarget.className != "closebtn") setSidenavWidth("100%");
     else setSidenavWidth("0px");
   };
   return (
     <Router>
-      <SideNav arr={[sidenavWidth, openCloseNav]} />
+      <SideNav
+        arr={[
+          setSidenavWidth,
+          activeMenuOption,
+          setActiveMenuOption,
+          sidenavWidth,
+          openCloseNav,
+        ]}
+      />
       <header>
         <div className="headerTop">
           <div id="menuIcon">
@@ -49,7 +57,9 @@ const App = () => {
           </div>
         </div>
         <div className="menu">
-          <Menu />
+          <Menu
+            arr={[setSidenavWidth, activeMenuOption, setActiveMenuOption]}
+          />
         </div>
       </header>
 
@@ -76,14 +86,13 @@ const App = () => {
 
       <footer>
         <div className="copyright">
-          ©2021 ყველა უფლება დაცულია. ტარიელ დუიშვილი{" "}
+          Copyright © 2021. Tariel Duishvili, All Rights Reserved.
         </div>
       </footer>
     </Router>
   );
 };
 export default App;
-
 
 export const Admin = (props) => {
   const [imgUrl, setImgUrl] = useState("");
@@ -94,13 +103,14 @@ export const Admin = (props) => {
     else setPrice(val);
   }
   return (
-    <div className='common'>
+    <div className="common">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           props.addProduct([imgUrl, price]);
         }}
-      ><label>პროდუქტის დამატება</label>
+      >
+        <label>პროდუქტის დამატება</label>
         <input
           className="url"
           onChange={handleChange}
@@ -128,28 +138,37 @@ export const Main = () => {
 };
 
 export const SideNav = (props) => {
+  const setSidenavWidth = props.arr[0];
   const styles = {
-    width: props.arr[0],
+    height: props.arr[3],
   };
 
   return (
     <div className="sidenav" style={styles}>
-      <a className="closebtn" onClick={props.arr[1]}>
+      <div id="logo"></div>
+      <a className="closebtn" onClick={props.arr[4]}>
         <div id="closeIcon">&times;</div>
       </a>
       {/**This component is used two times with different arguments in header,here and below */}
-      <Menu />
-      <Link to="/admin">
+      <Menu arr={[...props.arr]} />
+      <Link
+        to="/admin"
+        onClick={() => {
+          setSidenavWidth(0);
+        }}
+      >
         <div>
           <span>ადმინის პანელი</span>
         </div>
-      </Link>   
+      </Link>
     </div>
   );
 };
 
-const Menu = () => {
-  const [activeMenuOption, setActiveMenuOption] = useState(-1);
+const Menu = (props) => {
+  let setSidenavWidth = props.arr[0],
+    activeMenuOption = props.arr[1],
+    setActiveMenuOption = props.arr[2];
   const Border = "border-bottom";
   const Style = {
     /*'borderBottom': '3px solid rgb(35, 167, 75)'*/
@@ -161,7 +180,12 @@ const Menu = () => {
         to="/"
         style={activeMenuOption == 0 ? Style : {}}
         onClick={() => {
-          setActiveMenuOption(0);
+          {
+            setActiveMenuOption(0);
+          }
+          {
+            setSidenavWidth(0);
+          }
         }}
       >
         <div className="options">მთავარი</div>
@@ -170,7 +194,12 @@ const Menu = () => {
         to="/products"
         style={activeMenuOption == 1 ? Style : {}}
         onClick={() => {
-          setActiveMenuOption(1);
+          {
+            setActiveMenuOption(1);
+          }
+          {
+            setSidenavWidth(0);
+          }
         }}
       >
         <div className="options">პროდუქცია</div>
@@ -179,7 +208,12 @@ const Menu = () => {
         to="/delivery"
         style={activeMenuOption == 2 ? Style : {}}
         onClick={() => {
-          setActiveMenuOption(2);
+          {
+            setActiveMenuOption(2);
+          }
+          {
+            setSidenavWidth(0);
+          }
         }}
       >
         <div className="options">მიწოდების სერვისი</div>
@@ -188,7 +222,12 @@ const Menu = () => {
         to="/about"
         style={activeMenuOption == 3 ? Style : {}}
         onClick={() => {
-          setActiveMenuOption(3);
+          {
+            setActiveMenuOption(3);
+          }
+          {
+            setSidenavWidth(0);
+          }
         }}
       >
         <div className="options">ჩვენ შესახებ</div>
@@ -198,6 +237,9 @@ const Menu = () => {
         style={activeMenuOption == 4 ? Style : {}}
         onClick={() => {
           setActiveMenuOption(4);
+          {
+            setSidenavWidth(0);
+          }
         }}
       >
         <div className="options">საკონტაქტო ინფორმაცია</div>

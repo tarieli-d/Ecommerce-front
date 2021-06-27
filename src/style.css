@@ -1,9 +1,9 @@
-body{
+body {
   padding: 0;
-  margin:0;
+  margin: 0;
   background-color: rgb(214, 220, 230);
 }
-#root{
+#root {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,63 +14,67 @@ body{
   position: absolute;
   display: flex;
   flex-direction: column;
-  row-gap: 0.5rem;
-  height: 100%;
+  row-gap: 0.6rem;
+  height: 88%;
+  width: 100%;
   top: 0;
   left: 0;
-  background-color: rgb(8, 43, 66);
-  box-shadow: 0 0 3px 1px rgb(170, 170, 175) inset;
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: -2px 0 5px 1px rgba(182, 182, 182, 0.2) inset;
   overflow: hidden;
-  transition: 0.6s;
+  transition: 1s;
+  padding-right: 0rem;
   z-index: 2;
 }
-.sidenav a{
+.sidenav a {
   display: flex;
   align-items: center;
   height: 8%;
-}
-.sidenav a {
+  background-image: url("https://image.ibb.co/g5sxUk/pobrane.png");
   padding-left: 32px;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(231, 231, 223,0.7);
+  color: rgb(231, 231, 223, 1);
   transition: 0.4s;
   cursor: pointer;
 }
 .sidenav a:hover {
   color: white;
-  background-color:rgb(9, 133, 71);
+  background-image: none;
+  background-color: rgb(9, 133, 71);
+  background: rgb(12, 136, 185);
   opacity: 1;
 }
+
 .sidenav .closebtn {
   align-self: flex-end;
-}
-.sidenav .closebtn{
+  margin-bottom: 1rem;
   text-align: center;
   display: inline-block;
   font-weight: bold;
   font-size: 2.6rem;
   width: 3rem;
   padding: 0;
+  background: transparent !important;
 }
-.sidenav .closebtn:hover{
-  background: transparent;
-}
-.sidenav #closeIcon:hover{
+
+.sidenav #closeIcon:hover {
   color: rgb(248, 8, 8);
 }
 /*whole header*/
-header{
-  display:flex;
+header {
+  display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 7rem;
   background-color: rgb(8, 43, 66);
+
+  box-shadow: 0 0 4px 1px whitesmoke;
   z-index: 1;
 }
-.headerTop{
+.headerTop {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -80,16 +84,16 @@ header{
 /*Menu icon at top left*/
 #menuIcon {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  color: white;
+  color: rgb(241, 237, 237);
   background-color: transparent;
   width: 12rem;
   height: 70%;
   text-align: center;
   font: 2rem cursive;
 }
-#menuIcon svg{
+#menuIcon svg {
   cursor: pointer;
 }
 /*searchbar in header */
@@ -108,6 +112,7 @@ header{
   height: 100%;
   width: 90%;
   background: rgb(214, 207, 207);
+  border: 1px solid rgb(190, 184, 184);
   border-radius: 0.2rem;
 }
 #searchBar .searchIcon {
@@ -125,13 +130,13 @@ header{
   font-size: 0.8rem;
 }
 /*Admin panel form*/
-#admin{
+#admin {
   display: flex;
   justify-content: center;
   width: 12rem;
   height: 70%;
 }
-#admin a{
+#admin a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,15 +144,16 @@ header{
   width: 70%;
   column-gap: 0.1rem;
   font-size: 1.2rem;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
   color: white;
   background: rgb(9, 64, 100);
 }
-#admin a span{
+#admin a span {
   font-size: 1.6rem;
 }
 
-form{
+form {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -156,22 +162,23 @@ form{
   row-gap: 1rem;
   height: 250px;
   width: 400px;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
 }
 
-form::after{
+form::after {
   position: absolute;
   top: 16px;
   left: 0px;
   right: 0px;
   bottom: -10px;
-  content: '';
-  border: 2px solid rgb(0, 0, 0);
-  box-shadow:0 0 3px 1px rgb(220, 226, 230);
+  content: "";
+  /*border: 2px solid rgba(145, 143, 143, 0.493);*/
+  box-shadow: 0 0 20px rgb(0 0 0 / 20%);
+  border-radius: 0.2rem;
   background: rgb(255, 255, 255);
   z-index: -1;
 }
-form label{
+form label {
   padding: 0.3rem;
   background: rgba(0, 0, 0, 0.76);
   color: white;
@@ -183,28 +190,28 @@ form input {
   width: 85%;
   height: 15%;
   font-size: 1rem;
-  border-radius: .0rem;
+  border-radius: 0rem;
   background: rgba(178, 185, 184, 0.24);
   border: 1px solid rgb(209, 210, 212);
 }
-form button{
+form button {
   margin-top: auto;
   height: 15%;
-  padding:0.5rem;
+  padding: 0.5rem;
   padding-top: 0.3rem;
 }
-button{
+button {
   border-radius: 0.2rem;
-  color:white;
+  color: white;
   border: none;
   outline: none;
-  cursor:pointer;
+  cursor: pointer;
   padding: 0.3rem;
   padding-top: 0.1rem;
   font-size: 1.3rem;
   background: rgb(2, 179, 61);
 }
-button:hover{
+button:hover {
   background: rgb(28, 183, 194);
   color: white;
   cursor: pointer;
@@ -222,7 +229,7 @@ input {
   box-sizing: border-box;
 }
 /*straight menu */
-header .menu{
+header .menu {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -230,14 +237,14 @@ header .menu{
   width: 90%;
   height: 50%;
 }
-header .menu div{
-  background:transparent;
-  color: white;
+header .menu div {
+  background: transparent;
+  color: rgb(247, 245, 245);
   padding: 0.5rem;
   height: 50%;
   cursor: pointer;
 }
-a{
+a {
   color: white;
   text-decoration: none;
   font-weight: 600;
@@ -255,18 +262,18 @@ a{
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
-.menu a:hover:after{
+.menu a:hover:after {
   width: 100%;
   left: 0;
 }
-a:hover{
-  opacity: .7;
+a:hover {
+  opacity: 0.7;
 }
 /*products page content*/
-.main{
+.main {
   flex: auto;
   width: 80%;
-  padding:2rem 0 5rem 0;
+  padding: 2rem 0 5rem 0;
   display: grid;
   row-gap: 2rem;
   grid-template-columns: repeat(auto-fill, 200px);
@@ -285,7 +292,7 @@ a:hover{
   background: white;
   pointer-events: none;
 }
-.product::before{
+.product::before {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -299,98 +306,115 @@ a:hover{
   background: rgb(22, 22, 22);
   color: white;
 }
-.product:hover{
+.product:hover {
   transform: rotateY(180deg);
 }
-.top{
+.top {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60%;
   border-bottom: 1px rgb(151, 147, 146) solid;
 }
-.top span{
+.top span {
   height: 70%;
   width: 70%;
 }
-img{
+img {
   max-height: 460px;
   width: 100%;
 }
-.top img{
+.top img {
   width: 100%;
   height: 100%;
 }
-.bottom{
+.bottom {
   height: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(106, 91, 161) 
- /*#747373*/
-  ;
+  color: rgb(106, 91, 161) /*#747373*/;
 }
-.bottom span{
+.bottom span {
   text-decoration: underline;
   font-weight: 900;
 }
 
-.bottom button{
+.bottom button {
   width: 6rem;
   font-size: 25px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   padding-bottom: 5px;
   pointer-events: auto;
 }
 
 /*other pages*/
-.common{
+.common {
   flex: auto;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 100%;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   font-weight: 700;
 }
+.common .commonContent {
+  background: rgb(240, 238, 229);
+  max-width: 40%;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgb(0 0 0 / 20%);
+}
+.common .contact {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+.contact p {
+  display: inline;
+  margin-left: 1rem;
+}
+
 /*footer of website*/
-footer{
+footer {
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 5rem;
-  background: rgb(13, 13, 14);
+  background-image: url("https://image.ibb.co/g5sxUk/pobrane.png");
   color: rgb(202, 199, 199);
-}
-.copyright{
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
   font-weight: 900;
 }
+
 /*make website responsible*/
 @media (max-width: 950px) {
-  header .menu{
+  header .menu {
       display: none;
- }
+  }
 }
 @media (max-width: 575px) {
-  .headerTop #admin{
+  .headerTop #admin {
       display: none;
- }
+  }
 }
 @media (max-width: 400px) {
-  .headerTop{
+  .headerTop {
       height: 100%;
       flex-direction: column;
       justify-content: space-around;
       align-items: flex-start;
- }
-  .headerTop #menuIcon{
+  }
+  .headerTop #menuIcon {
       height: 30%;
- }
-  .headerTop #searchBar{
+  }
+  .headerTop #searchBar {
       height: 30%;
- }
+  }
 }
