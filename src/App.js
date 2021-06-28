@@ -41,7 +41,7 @@ const App = () => {
           <div id="menuIcon">
             <FaBars onClick={openCloseNav} />
             <span>
-              <Wave speed="4" text="Wellcome"   effect="fadeOut"/>
+              <Wave speed={4} text="Wellcome"   effect="fadeOut"/>
             </span>
           </div>
 

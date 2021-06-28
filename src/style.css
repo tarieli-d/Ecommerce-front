@@ -375,7 +375,13 @@ img {
   text-decoration: underline;
   font-weight: 900;
 }
-
+.bottom input{
+   text-decoration: underline rgb(17, 66, 158);
+   text-align: center;
+}
+::placeholder{
+  color: rgb(17, 73, 158);
+}
 .bottom button {
   width: 6rem;
   font-size: 25px;
@@ -405,6 +411,9 @@ img {
   flex: 0;
   border-top: 3px #242525 solid;
 }
+.admin .product{
+  pointer-events: auto;
+}
 .admin #adminDelText{
   position: relative;
   top:4.5rem;
@@ -412,8 +421,12 @@ img {
   color: white;
   padding: 0.5rem;
 }
+.admin .main .bottom input{
+  pointer-events: auto;
+  text-decoration: none;
+}
 .common .commonContent {
-  background: rgb(240, 238, 229);
+  background: white;
   max-width: 40%;
   padding: 2rem;
   box-shadow: 0 0 20px rgb(0 0 0 / 20%);
