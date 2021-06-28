@@ -1,17 +1,23 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { FaSearch, FaBars, FaUserAlt,FaLink,FaMoneyBillAlt} from "react-icons/fa";
-import { Wave } from "react-animated-text";
-import "./style.css";
-import Products from "./components/Products";
-import Contact from "./components/Contact.js";
-import Delivery from "./components/Delivery.js";
-import About from "./components/About.js";
-import productsArray from "./components/constants.js";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  FaSearch,
+  FaBars,
+  FaUserAlt,
+  FaLink,
+  FaMoneyBillAlt
+} from 'react-icons/fa';
+import { Wave } from 'react-animated-text';
+import './style.css';
+import Products from './components/Products';
+import Contact from './components/Contact.js';
+import Delivery from './components/Delivery.js';
+import About from './components/About.js';
+import productsArray from './components/constants.js';
 
 const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
-  const [sidenavWidth, setSidenavWidth] = useState("0px");
+  const [sidenavWidth, setSidenavWidth] = useState('0px');
   const [products, setProduct] = useState(productsArray);
 
   function addProduct(arg) {
@@ -20,10 +26,10 @@ const App = () => {
   }
 
   /**open left side navbar or close it*/
-  const openCloseNav = (e) => {
+  const openCloseNav = e => {
     e.stopPropagation();
-    if (e.currentTarget.className != "closebtn") setSidenavWidth("100%");
-    else setSidenavWidth("0px");
+    if (e.currentTarget.className != 'closebtn') setSidenavWidth('100%');
+    else setSidenavWidth('0px');
   };
   return (
     <Router>
@@ -33,7 +39,7 @@ const App = () => {
           activeMenuOption,
           setActiveMenuOption,
           sidenavWidth,
-          openCloseNav,
+          openCloseNav
         ]}
       />
       <header>
@@ -41,7 +47,7 @@ const App = () => {
           <div id="menuIcon">
             <FaBars onClick={openCloseNav} />
             <span>
-              <Wave speed={4} text="Wellcome"  effect="fadeOut"/>
+              <Wave speed={4} text="Wellcome" effect="fadeOut" />
             </span>
           </div>
 
@@ -53,7 +59,12 @@ const App = () => {
           </div>
 
           <div id="admin">
-            <Link to="/admin" onClick={()=>{setActiveMenuOption(-1)}}>
+            <Link
+              to="/admin"
+              onClick={() => {
+                setActiveMenuOption(-1);
+              }}
+            >
               <FaUserAlt />
               <span>Admin</span>
             </Link>
@@ -68,10 +79,10 @@ const App = () => {
 
       <Switch>
         <Route path="/admin">
-          <Admin arr={[addProduct,products,setProduct]} />
+          <Admin arr={[addProduct, products, setProduct]} />
         </Route>
         <Route path="/products">
-          <Products arr={[products,setProduct,'ყიდვა']} />
+          <Products arr={[products, setProduct, 'ყიდვა']} />
         </Route>
         <Route path="/delivery">
           <Delivery />
@@ -97,45 +108,45 @@ const App = () => {
 };
 export default App;
 
-export const Admin = (props) => {
-  const [imgUrl, setImgUrl] = useState("");
-  const [price, setPrice] = useState("");
+export const Admin = props => {
+  const [imgUrl, setImgUrl] = useState('');
+  const [price, setPrice] = useState('');
   function handleChange(e) {
     let val = e.currentTarget.value;
-    if (e.currentTarget.className == "url") setImgUrl(val);
+    if (e.currentTarget.className == 'url') setImgUrl(val);
     else setPrice(val);
   }
   return (
     <div className="common admin">
       <form
-        onSubmit={(e) => {
+        onSubmit={e => {
           e.preventDefault();
           props.arr[0]([imgUrl, price]);
         }}
       >
         <label>პროდუქტის დამატება</label>
         <div>
-        {<FaLink/>}
-        <input
-          className="url"
-          onChange={handleChange}
-          value={imgUrl}
-          placeholder="Image url"
-        /> 
+          {<FaLink />}
+          <input
+            className="url"
+            onChange={handleChange}
+            value={imgUrl}
+            placeholder="Image url"
+          />
         </div>
         <div>
-        {<FaMoneyBillAlt/>}
-        <input
-          className="price"
-          onChange={handleChange}
-          value={price}
-          placeholder="Price"
-        />
+          {<FaMoneyBillAlt />}
+          <input
+            className="price"
+            onChange={handleChange}
+            value={price}
+            placeholder="Price"
+          />
         </div>
         <button>დამატება</button>
       </form>
-      <div id='adminDelText'>პროდუქტის წაშლა ან ფასის შეცვლა</div>
-      <Products arr={[props.arr[1],props.arr[2],'წაშლა']} />
+      <div id="adminDelText">პროდუქტის წაშლა ან ფასის შეცვლა</div>
+      <Products arr={[props.arr[1], props.arr[2], 'წაშლა']} />
     </div>
   );
 };
@@ -148,15 +159,15 @@ export const Main = () => {
   );
 };
 
-export const SideNav = (props) => {
+export const SideNav = props => {
   const setSidenavWidth = props.arr[0];
   const styles = {
-    height: props.arr[3],
+    height: props.arr[3]
   };
 
   return (
     <div className="sidenav" style={styles}>
-      <div id="logo"></div>
+      <div id="logo" />
       <a className="closebtn" onClick={props.arr[4]}>
         <div id="closeIcon">&times;</div>
       </a>
@@ -176,14 +187,14 @@ export const SideNav = (props) => {
   );
 };
 
-const Menu = (props) => {
+const Menu = props => {
   let setSidenavWidth = props.arr[0],
     activeMenuOption = props.arr[1],
     setActiveMenuOption = props.arr[2];
-  const Border = "border-bottom";
+  const Border = 'border-bottom';
   const Style = {
     /*'borderBottom': '3px solid rgb(35, 167, 75)'*/
-    background: "rgb(12, 136, 185)",
+    background: 'rgb(12, 136, 185)'
   };
   return (
     <>
