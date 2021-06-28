@@ -326,7 +326,7 @@ a:hover {
   background: white;
   pointer-events: none;
 }
-.product::before {
+.animated::before {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -409,7 +409,7 @@ img {
 }
 .admin .main{
   flex: 0;
-  border-top: 3px #242525 solid;
+  border-top: 2px #393a3a solid;
 }
 .admin .product{
   pointer-events: auto;
@@ -421,9 +421,36 @@ img {
   color: white;
   padding: 0.5rem;
 }
+.main .bottom span button {
+  display: none;
+}
+.admin .main .bottom span{
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+}
 .admin .main .bottom input{
   pointer-events: auto;
   text-decoration: none;
+  border:1px solid #e2e5e9;
+  width: 60%;
+  height: 100%;
+  padding: 0;
+  font-size: 0.8rem;
+}
+.admin .main .bottom span button{
+  display: inline;
+  width: 30%;
+  height: 100%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  z-index: 32;
+}
+.admin .main .bottom span button:hover{
+  background: black;
 }
 .common .commonContent {
   background: white;

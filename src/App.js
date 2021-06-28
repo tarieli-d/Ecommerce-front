@@ -41,7 +41,7 @@ const App = () => {
           <div id="menuIcon">
             <FaBars onClick={openCloseNav} />
             <span>
-              <Wave speed={4} text="Wellcome"   effect="fadeOut"/>
+              <Wave speed={4} text="Wellcome"  effect="fadeOut"/>
             </span>
           </div>
 
@@ -53,7 +53,7 @@ const App = () => {
           </div>
 
           <div id="admin">
-            <Link to="/admin">
+            <Link to="/admin" onClick={()=>{setActiveMenuOption(-1)}}>
               <FaUserAlt />
               <span>Admin</span>
             </Link>
@@ -121,7 +121,7 @@ export const Admin = (props) => {
           onChange={handleChange}
           value={imgUrl}
           placeholder="Image url"
-        />
+        /> 
         </div>
         <div>
         {<FaMoneyBillAlt/>}
@@ -134,7 +134,7 @@ export const Admin = (props) => {
         </div>
         <button>დამატება</button>
       </form>
-      <div id='adminDelText'>პროდუქტის წაშლა</div>
+      <div id='adminDelText'>პროდუქტის წაშლა ან ფასის შეცვლა</div>
       <Products arr={[props.arr[1],props.arr[2],'წაშლა']} />
     </div>
   );
