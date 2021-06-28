@@ -86,25 +86,29 @@ header {
   justify-content: center;
   align-items: center;
   column-gap: .5rem;
-  color: white;
+  color: rgb(20, 140, 170);
   background-color: transparent;
   width: 13rem;
   height: 70%;
   text-align: center;
   font-size: 2rem;
-  font-family: 'Courier New', Courier;
+  font-weight: 900;
   animation: menuIcon 6s  infinite;
 }
+#menuIcon span{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+}
+/*
 @keyframes menuIcon{
   0%{ 
-    color: rgba(10, 190, 64, 0.452);
+    color: rgb(28, 10, 190);
     font-weight: 600;
   }
   100%{
     color: rgb(64, 233, 31);
     font-weight: 600; 
   }
-}
+}*/
 #menuIcon svg {
   cursor: pointer;
   color: white;
@@ -336,8 +340,8 @@ a:hover {
   background: rgb(22, 22, 22);
   color: white;
 }
-.product:hover {
-  transform: rotateY(180deg);
+.animated:hover{
+ transform: rotateY(180deg);
 }
 .top {
   display: flex;
@@ -385,12 +389,28 @@ img {
 .common {
   flex: auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  row-gap: 3rem;
   width: 100%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
       "Lucida Sans", Arial, sans-serif;
   font-weight: 700;
+}
+ .admin{
+  margin-top: 1rem;
+}
+.admin .main{
+  flex: 0;
+  border-top: 3px #242525 solid;
+}
+.admin #adminDelText{
+  position: relative;
+  top:4.5rem;
+  background: rgb(37, 37, 37);
+  color: white;
+  padding: 0.5rem;
 }
 .common .commonContent {
   background: rgb(240, 238, 229);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { FaSearch, FaBars, FaUserAlt,FaLink,FaMoneyBillAlt} from "react-icons/fa";
+import { Wave } from "react-animated-text";
 import "./style.css";
 import Products from "./components/Products";
 import Contact from "./components/Contact.js";
@@ -39,7 +40,9 @@ const App = () => {
         <div className="headerTop">
           <div id="menuIcon">
             <FaBars onClick={openCloseNav} />
-            <span>Wellcome</span>
+            <span>
+              <Wave speed="4" text="Wellcome"   effect="fadeOut"/>
+            </span>
           </div>
 
           <div id="searchBar">
@@ -65,10 +68,10 @@ const App = () => {
 
       <Switch>
         <Route path="/admin">
-          <Admin addProduct={addProduct} />
+          <Admin arr={[addProduct,products,setProduct]} />
         </Route>
         <Route path="/products">
-          <Products products={products} />
+          <Products arr={[products,setProduct,'ყიდვა']} />
         </Route>
         <Route path="/delivery">
           <Delivery />
@@ -103,11 +106,11 @@ export const Admin = (props) => {
     else setPrice(val);
   }
   return (
-    <div className="common">
+    <div className="common admin">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          props.addProduct([imgUrl, price]);
+          props.arr[0]([imgUrl, price]);
         }}
       >
         <label>პროდუქტის დამატება</label>
@@ -131,6 +134,8 @@ export const Admin = (props) => {
         </div>
         <button>დამატება</button>
       </form>
+      <div id='adminDelText'>პროდუქტის წაშლა</div>
+      <Products arr={[props.arr[1],props.arr[2],'წაშლა']} />
     </div>
   );
 };
