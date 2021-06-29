@@ -10,17 +10,18 @@ const Products = props => {
     if (action == 'წაშლა') props.arr[1](newObject);
   };
 
-  const priceChanged = e => {
+  const priceChanged = (title)=> {
     const newObject = props.arr[0].filter(
       prod => prod.imgUrl != activeInput
     );
     const obj = {
-      imgUrl:activeInput,
-      price: newPrice
+      imgUrl: activeInput,
+      price: newPrice,
+      title: title
     };
     newObject.unshift(obj);
     props.arr[1](newObject);
-    console.log(newObject);
+   // console.log(newObject);
 
   };
   return (
@@ -40,6 +41,7 @@ const Products = props => {
                 <span>
                   <input
                     className={e.imgUrl}
+                    title={e.title}
                     onChange={e => {
                       setNewPrice(e.currentTarget.value);
                       setActiveInput(e.currentTarget.className);
@@ -47,7 +49,7 @@ const Products = props => {
                     value={activeInput == e.imgUrl ? newPrice : ''}
                     placeholder={`${e.price} ლარი`}
                   />
-                  <button onClick={() => priceChanged()}>შეცვლა</button>
+                  <button onClick={() => priceChanged(e.title)}>შეცვლა</button>
                 </span>
                 <button
                   style={

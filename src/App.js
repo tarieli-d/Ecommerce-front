@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {
   FaSearch,
@@ -20,11 +20,19 @@ const App = () => {
   const [sidenavWidth, setSidenavWidth] = useState('0px');
   const [products, setProduct] = useState(productsArray);
   const [filteredData, setFilteredData] = useState(products);
-  const [searchResultDisplay,setSearchResultDisplay] = useState('none');
-  const [searchValue,setSearchValue] = useState('');
+  const [searchResultDisplay, setSearchResultDisplay] = useState('none');
+  const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    setFilteredData(
+      products.filter(data => {
+        return data.title.search(searchValue) != -1;
+      })
+    );
+  }, [products]);
 
   function addProduct(arg) {
-    let product = { imgUrl: arg[0], price: arg[1] };
+    let product = { imgUrl: arg[0], title: arg[1], price: arg[2] };
     setProduct([...products, product]);
   }
 
@@ -36,22 +44,18 @@ const App = () => {
   };
 
   const handleSearch = e => {
-    let v=e.currentTarget.value;
-    setSearchValue(v);
-    if(v==''){
-      setSearchResultDisplay('none')
-      return;
-    }
-    else 
-      setSearchResultDisplay('flex');
-    let value = v.toLowerCase();
+    let value = e.currentTarget.value.toLowerCase();
     let result = [];
+    setSearchValue(value);
+
+    if (value == '') setSearchResultDisplay('none');
+    else setSearchResultDisplay('flex');
+
     result = products.filter(data => {
       return data.title.search(value) != -1;
     });
     setFilteredData(result);
   };
-
 
   return (
     <Router>
@@ -82,12 +86,19 @@ const App = () => {
               />
               <FaSearch className="searchIcon" />
             </span>
-            <div style={{display:searchResultDisplay}} className="searchResult">
+            <div
+              style={{ display: searchResultDisplay }}
+              className="searchResult"
+            >
               {filteredData.map((value, index) => {
                 return (
-                <a key={index} href='#' onClick={(e)=>e.currentTarget.href='/products'}>
+                  <Link
+                    key={index}
+                    to="/products"
+                    onClick={e => (e.currentTarget.to = '/products')}
+                  >
                     {value.title}
-                  </a>
+                  </Link>
                 );
               })}
             </div>
@@ -114,7 +125,7 @@ const App = () => {
 
       <Switch>
         <Route path="/admin">
-          <Admin arr={[addProduct, products, setProduct]} />
+          <Admin arr={[addProduct, filteredData, setProduct]} />
         </Route>
         <Route path="/products">
           <Products arr={[filteredData, setProduct, 'ყიდვა']} />
@@ -146,9 +157,12 @@ export default App;
 export const Admin = props => {
   const [imgUrl, setImgUrl] = useState('');
   const [price, setPrice] = useState('');
+  const [title, setTitle] = useState('');
+
   function handleChange(e) {
     let val = e.currentTarget.value;
     if (e.currentTarget.className == 'url') setImgUrl(val);
+    else if (e.currentTarget.className == 'title') setTitle(val);
     else setPrice(val);
   }
   return (
@@ -156,7 +170,7 @@ export const Admin = props => {
       <form
         onSubmit={e => {
           e.preventDefault();
-          props.arr[0]([imgUrl, price]);
+          props.arr[0]([imgUrl, title, price]);
         }}
       >
         <label>პროდუქტის დამატება</label>
@@ -167,6 +181,15 @@ export const Admin = props => {
             onChange={handleChange}
             value={imgUrl}
             placeholder="Image url"
+          />
+        </div>
+        <div>
+          {<FaLink />}
+          <input
+            className="title"
+            onChange={handleChange}
+            value={title}
+            placeholder="Title"
           />
         </div>
         <div>
