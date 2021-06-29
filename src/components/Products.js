@@ -38,6 +38,7 @@ const Products = props => {
                 <img key={i} src={e.imgUrl} />
               </div>
               <div className="bottom">
+                <span>{e.title}</span>
                 <span>
                   <input
                     className={e.imgUrl}
