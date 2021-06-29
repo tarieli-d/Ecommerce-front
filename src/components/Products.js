@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import '../style.css';
 
-const MySelect=(props)=>{
-  return <select onClick={props.onClick} className="select">
-          {props.options.map((e, i) => {
-            return <option value={e} >{(e)}</option>;
-          })}
-        </select>
-}
-
+const MySelect = props => {
+  return (
+    <select onClick={props.onClick} className="select">
+      {props.options.map((e, i) => {
+        return <option value={e}>{e}</option>;
+      })}
+    </select>
+  );
+};
 
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
@@ -19,10 +20,8 @@ const Products = props => {
     if (action == 'წაშლა') props.arr[1](newObject);
   };
 
-  const priceChanged = (title)=> {
-    const newObject = props.arr[0].filter(
-      prod => prod.imgUrl != activeInput
-    );
+  const priceChanged = title => {
+    const newObject = props.arr[0].filter(prod => prod.imgUrl != activeInput);
     const obj = {
       imgUrl: activeInput,
       price: newPrice,
@@ -30,26 +29,40 @@ const Products = props => {
     };
     newObject.unshift(obj);
     props.arr[1](newObject);
-   // console.log(newObject);
-
   };
-  const Sort = (e)=> {
-  let value=e.currentTarget.value;
-  let arr=props.arr[0];
-   if(value=='ფასით - დაბლიდან მაღლა')
-     arr.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
-   else if(value=='ფასით - მაღლიდან დაბლა')
-     arr.sort((a,b) => (a.price < b.price) ? 1 : ((b.price < a.price) ? -1 : 0))
-   props.arr[1](arr)
-   console.log(arr);
 
+  const Sort = e => {
+    let value = e.currentTarget.value;
+    let arr = props.arr[0];
+    if (value == 'ფასით - დაბლიდან მაღლა')
+      arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
+    else if (value == 'ფასით - მაღლიდან დაბლა')
+      arr.sort((a, b) => (a.price < b.price ? 1 : b.price < a.price ? -1 : 0));
+    else if (value == 'დასახელების მიხედვით ა-ჰ')
+      arr.sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0));
+    else if (value == 'თარიღით - ახლიდან ძველისკენ')
+      arr.sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0));
+    else if (value == 'თარიღით - ძველიდან ახლისკენ')
+      arr.sort((a, b) => (a.date > b.date ? 1 : b.date > a.date ? -1 : 0));
+    props.arr[1](arr);
   };
 
   return (
     <>
-    
-      <div className="main">   
-      <div className='sort'><span>დალაგება:</span> <MySelect onClick={Sort} options={['ფასით - დაბლიდან მაღლა','ფასით - მაღლიდან დაბლა' ,'დასახელების მიხედვით ა-ჰ', 'დასახელების მიხედვით ჰ-ა','თარიღით',]}/></div> 
+      <div className="main">
+        <div className="sort">
+          <span>დალაგება:</span>{' '}
+          <MySelect
+            onClick={Sort}
+            options={[
+              'ფასით - დაბლიდან მაღლა',
+              'ფასით - მაღლიდან დაბლა',
+              'დასახელების მიხედვით ა-ჰ',
+              'თარიღით - ძველიდან ახლისკენ',
+              'თარიღით - ახლიდან ძველისკენ'
+            ]}
+          />
+        </div>
         {props.arr[0].map((e, i) => {
           return (
             <div

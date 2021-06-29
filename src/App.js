@@ -32,7 +32,12 @@ const App = () => {
   }, [products]);
 
   function addProduct(arg) {
-    let product = { imgUrl: arg[0], title: arg[1], price: arg[2] };
+    let product = {
+      imgUrl: arg[0],
+      title: arg[1],
+      price: arg[2],
+      date: new Date()
+    };
     setProduct([...products, product]);
   }
 
