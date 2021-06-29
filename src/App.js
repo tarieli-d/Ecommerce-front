@@ -54,6 +54,8 @@ const App = () => {
     result = products.filter(data => {
       return data.title.search(value) != -1;
     });
+    /*result.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
+    result.sort((a,b) => (a.price < b.price) ? 1 : ((b.price < a.price) ? -1 : 0))*/
     setFilteredData(result);
   };
 

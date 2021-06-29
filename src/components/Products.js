@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import '../style.css';
 
+const MySelect=(props)=>{
+  return <select onClick={props.onClick} className="select">
+          {props.options.map((e, i) => {
+            return <option value={e} >{(e)}</option>;
+          })}
+        </select>
+}
+
+
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
@@ -24,9 +33,23 @@ const Products = props => {
    // console.log(newObject);
 
   };
+  const Sort = (e)=> {
+  let value=e.currentTarget.value;
+  let arr=props.arr[0];
+   if(value=='ფასით - დაბლიდან მაღლა')
+     arr.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
+   else if(value=='ფასით - მაღლიდან დაბლა')
+     arr.sort((a,b) => (a.price < b.price) ? 1 : ((b.price < a.price) ? -1 : 0))
+   props.arr[1](arr)
+   console.log(arr);
+
+  };
+
   return (
     <>
-      <div className="main">
+    
+      <div className="main">   
+      <div className='sort'><span>დალაგება:</span> <MySelect onClick={Sort} options={['ფასით - დაბლიდან მაღლა','ფასით - მაღლიდან დაბლა' ,'დასახელების მიხედვით ა-ჰ', 'დასახელების მიხედვით ჰ-ა','თარიღით',]}/></div> 
         {props.arr[0].map((e, i) => {
           return (
             <div
