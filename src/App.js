@@ -19,6 +19,9 @@ const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
   const [sidenavWidth, setSidenavWidth] = useState('0px');
   const [products, setProduct] = useState(productsArray);
+  const [filteredData, setFilteredData] = useState(products);
+  const [searchResultDisplay,setSearchResultDisplay] = useState('none');
+  const [searchValue,setSearchValue] = useState('');
 
   function addProduct(arg) {
     let product = { imgUrl: arg[0], price: arg[1] };
@@ -31,6 +34,25 @@ const App = () => {
     if (e.currentTarget.className != 'closebtn') setSidenavWidth('100%');
     else setSidenavWidth('0px');
   };
+
+  const handleSearch = e => {
+    let v=e.currentTarget.value;
+    setSearchValue(v);
+    if(v==''){
+      setSearchResultDisplay('none')
+      return;
+    }
+    else 
+      setSearchResultDisplay('flex');
+    let value = v.toLowerCase();
+    let result = [];
+    result = products.filter(data => {
+      return data.title.search(value) != -1;
+    });
+    setFilteredData(result);
+  };
+
+
   return (
     <Router>
       <SideNav
@@ -53,9 +75,22 @@ const App = () => {
 
           <div id="searchBar">
             <span>
-              <input placeholder="Search.." />
+              <input
+                onChange={e => handleSearch(e)}
+                value={searchValue}
+                placeholder="Search product.."
+              />
               <FaSearch className="searchIcon" />
             </span>
+            <div style={{display:searchResultDisplay}} className="searchResult">
+              {filteredData.map((value, index) => {
+                return (
+                <a key={index} href='#' onClick={(e)=>e.currentTarget.href='/products'}>
+                    {value.title}
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           <div id="admin">
@@ -82,7 +117,7 @@ const App = () => {
           <Admin arr={[addProduct, products, setProduct]} />
         </Route>
         <Route path="/products">
-          <Products arr={[products, setProduct, 'ყიდვა']} />
+          <Products arr={[filteredData, setProduct, 'ყიდვა']} />
         </Route>
         <Route path="/delivery">
           <Delivery />

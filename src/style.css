@@ -115,7 +115,9 @@ header {
 }
 /*searchbar in header */
 #searchBar {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 25rem;
   height: 70%;
@@ -146,6 +148,30 @@ header {
   transform: translate(0px, -12px);
   font-size: 0.8rem;
 }
+.searchResult {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  flex-flow: column wrap;
+  position: absolute;
+  height: 260px;
+  top: 50px;
+  padding: 8;
+}
+.searchResult a {
+  padding: 7px;
+  border: 0.5px solid grey;
+  background-color: rgb(240, 241, 241);
+  color: black;
+  z-index: 3;
+  cursor: pointer;
+}
+.searchResult a:hover{
+  opacity: 1;
+  background-color: black;
+  color: white;
+}
+
 /*Admin panel form*/
 #admin {
   display: flex;
@@ -378,7 +404,7 @@ img {
   text-decoration: underline rgb(17, 66, 158);
   text-align: center;
 }
-::placeholder {
+.bottom ::placeholder {
   color: rgb(17, 73, 158);
 }
 .bottom button {
