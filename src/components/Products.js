@@ -27,7 +27,7 @@ const Products = props => {
       imgUrl: activeInput,
       price: newPrice,
       title: title,
-      date: new Date()
+      date: (new Date()).toString()
     };
     newObject.unshift(obj);
     props.arr[1](newObject);

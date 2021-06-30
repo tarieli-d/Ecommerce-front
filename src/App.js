@@ -38,7 +38,6 @@ const App = () => {
       price: arg[2],
       date: new Date().toString()
     };
-    console.log(product);
     setProduct([...products, product]);
   }
 
@@ -50,11 +49,18 @@ const App = () => {
   };
 
   const handleSearch = e => {
-    let value = e.currentTarget.value.toLowerCase();
-    let result = [];
+    let value = '',
+      result = [];
+    if (typeof e.currentTarget == 'object')
+      value = e.currentTarget.value.toLowerCase();
+    else {
+      value = e.toLowerCase();
+    }
+
     setSearchValue(value);
 
-    if (value == '') setSearchResultDisplay('none');
+    if (value == '' || typeof e.currentTarget != 'object')
+      setSearchResultDisplay('none');
     else setSearchResultDisplay('flex');
 
     result = products.filter(data => {
@@ -101,7 +107,8 @@ const App = () => {
                   <Link
                     key={index}
                     to="/products"
-                    onClick={e => (e.currentTarget.to = '/products')}
+                    value={searchValue}
+                    onClick={() => handleSearch(value.title)}
                   >
                     {value.title}
                   </Link>
