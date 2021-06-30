@@ -15,6 +15,7 @@ const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
   let act = props.arr[2];
+
   const removeItem = (imgUrl, action) => {
     const newObject = props.arr[0].filter(prod => prod.imgUrl != imgUrl);
     if (action == 'წაშლა') props.arr[1](newObject);
@@ -25,7 +26,8 @@ const Products = props => {
     const obj = {
       imgUrl: activeInput,
       price: newPrice,
-      title: title
+      title: title,
+      date: new Date()
     };
     newObject.unshift(obj);
     props.arr[1](newObject);
@@ -34,6 +36,7 @@ const Products = props => {
   const Sort = e => {
     let value = e.currentTarget.value;
     let arr = props.arr[0];
+    console.log('5' > '50');
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
     else if (value == 'ფასით - მაღლიდან დაბლა')
@@ -55,11 +58,11 @@ const Products = props => {
           <MySelect
             onClick={Sort}
             options={[
-              ' ფასით - დაბლიდან მაღლა',
-              ' ფასით - მაღლიდან დაბლა',
-              ' დასახელების მიხედვით ა-ჰ',
-              ' თარიღით - ძველიდან ახლისკენ',
-              ' თარიღით - ახლიდან ძველისკენ'
+              'ფასით - დაბლიდან მაღლა',
+              'ფასით - მაღლიდან დაბლა',
+              'დასახელების მიხედვით ა-ჰ',
+              'თარიღით - ძველიდან ახლისკენ',
+              'თარიღით - ახლიდან ძველისკენ'
             ]}
           />
         </div>

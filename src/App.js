@@ -36,8 +36,9 @@ const App = () => {
       imgUrl: arg[0],
       title: arg[1],
       price: arg[2],
-      date: new Date()
+      date: new Date().toString()
     };
+    console.log(product);
     setProduct([...products, product]);
   }
 
