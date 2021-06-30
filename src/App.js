@@ -59,8 +59,6 @@ const App = () => {
     result = products.filter(data => {
       return data.title.search(value) != -1;
     });
-    /*result.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
-    result.sort((a,b) => (a.price < b.price) ? 1 : ((b.price < a.price) ? -1 : 0))*/
     setFilteredData(result);
   };
 
@@ -259,7 +257,8 @@ const Menu = props => {
   const Border = 'border-bottom';
   const Style = {
     /*'borderBottom': '3px solid rgb(35, 167, 75)'*/
-    background: 'rgb(12, 136, 185)'
+    background: 'rgb(12, 136, 185)',
+    color: 'white'
   };
   return (
     <>
