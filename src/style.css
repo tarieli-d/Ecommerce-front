@@ -110,11 +110,10 @@ header {
 
 /*searchbar in header */
 #searchBar {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 25rem;
+  align-items: center;
+  width: 22rem;
   height: 70%;
   font: 1.2rem 'Cookie', cursive;
 }
@@ -137,29 +136,26 @@ header {
 #searchBar span .searchIcon:hover {
   color: rgb(37, 99, 170);
 }
-#searchBar input:focus::-webkit-input-placeholder {
-  transition: 0.5s;
+#searchBar input:focus::-webkit-input-placeholder { transition: 0.5s;
   transform: translate(0px, -12px);
   font-size: 0.8rem;
 }
 .searchResult {
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
   flex-flow: column wrap;
-  position: absolute;
+  position: relative;
   height: 260px;
-  top: 50px;
-  padding: 8;
+  width: 1%;
 }
 .searchResult a {
-  min-width: 290px;
+  width: 85%;
   padding: 7px;
+  box-sizing: border-box;
+  color: black;
   border: 1px solid rgb(223, 218, 218);
   background-color: rgb(240, 241, 241);
-  color: black;
-  z-index: 3;
-  cursor: pointer;
+  z-index: 2;
 }
 .searchResult a:hover {
   opacity: 1;
@@ -287,18 +283,17 @@ header .menu {
   width: 90%;
   height: 50%;
 }
-header .menu div {
+header .menu a {
+  position: relative;
   background: transparent;
   color: rgb(17, 17, 17);
-  padding: 0.5rem;
-  height: 50%;
+  padding: 0.3rem;
+  height: 35%;
   cursor: pointer;
 }
 a {
-  color: white;
   text-decoration: none;
   font-weight: 600;
-  position: relative;
 }
 .menu a:after {
   background: none repeat scroll 0 0 transparent;
