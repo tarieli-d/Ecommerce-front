@@ -23,8 +23,6 @@ const App = () => {
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
 
-  
-
   function addProduct(arg) {
     let product = {
       imgUrl: arg[0],
@@ -62,13 +60,6 @@ const App = () => {
     });
     setFilteredData(result);
   };
-
-  const setActiveMenuOptioni = e => {
-    setActiveMenuOption(2)
-  }
-  const setFilteredDatas = e => {
-    setFilteredData(e)
-  }
 
   return (
     <Router>
@@ -139,10 +130,29 @@ const App = () => {
 
       <Switch>
         <Route path="/admin">
-          <Admin addProduct={addProduct} arr={[filteredData,setFilteredData,'წაშლა',products,setProduct]} />
+          <Admin
+            addProduct={addProduct}
+            arr={[
+              filteredData,
+              setFilteredData,
+              'წაშლა',
+              products,
+              setProduct,
+              searchValue
+            ]}
+          />
         </Route>
         <Route path="/products">
-          <Products arr={[filteredData, setFilteredData, 'ყიდვა',products,setProduct]} />
+          <Products
+            arr={[
+              filteredData,
+              setFilteredData,
+              'ყიდვა',
+              products,
+              setProduct,
+              searchValue
+            ]}
+          />
         </Route>
         <Route path="/delivery">
           <Delivery />

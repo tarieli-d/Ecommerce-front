@@ -14,14 +14,18 @@ const MySelect = props => {
   );
 };
 
-
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
   const [sortValue, setSortValue] = useState('');
-  const [filteredData, setFilteredData, act, products, setProduct] = [
-    ...props.arr
-  ];
+  const [
+    filteredData,
+    setFilteredData,
+    act,
+    products,
+    setProduct,
+    searchValue
+  ] = [...props.arr];
 
   useEffect(() => {
     const newObject = [...products];
@@ -47,7 +51,7 @@ const Products = props => {
   };
 
   const Sort = value => {
-    let arr = [...products];
+    let arr = [...products].filter(data => data.title.includes(searchValue));
     setSortValue(value);
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
@@ -56,9 +60,21 @@ const Products = props => {
     else if (value == 'დასახელების მიხედვით ა-ჰ')
       arr.sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0));
     else if (value == 'თარიღით - ახლიდან ძველისკენ')
-      arr.sort((a, b) => (new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : new Date(b.date).getTime() < new Date(a.date).getTime() ? -1 : 0));
+      arr.sort((a, b) =>
+        new Date(a.date).getTime() < new Date(b.date).getTime()
+          ? 1
+          : new Date(b.date).getTime() < new Date(a.date).getTime()
+          ? -1
+          : 0
+      );
     else if (value == 'თარიღით - ძველიდან ახლისკენ')
-      arr.sort((a, b) => (new Date(a.date).getTime() > new Date(b.date).getTime() ? 1 : new Date(b.date).getTime() > new Date(a.date).getTime() ? -1 : 0));
+      arr.sort((a, b) =>
+        new Date(a.date).getTime() > new Date(b.date).getTime()
+          ? 1
+          : new Date(b.date).getTime() > new Date(a.date).getTime()
+          ? -1
+          : 0
+      );
 
     setFilteredData(arr);
     return arr;

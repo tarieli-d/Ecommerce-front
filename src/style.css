@@ -113,7 +113,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 22rem;
+  width: 24rem;
   height: 70%;
   font: 1.2rem 'Cookie', cursive;
 }
@@ -136,7 +136,8 @@ header {
 #searchBar span .searchIcon:hover {
   color: rgb(37, 99, 170);
 }
-#searchBar input:focus::-webkit-input-placeholder { transition: 0.5s;
+#searchBar input:focus::-webkit-input-placeholder {
+  transition: 0.5s;
   transform: translate(0px, -12px);
   font-size: 0.8rem;
 }
@@ -146,7 +147,7 @@ header {
   flex-flow: column wrap;
   position: relative;
   height: 260px;
-  width: 1%;
+  width: 90%;
 }
 .searchResult a {
   width: 85%;
