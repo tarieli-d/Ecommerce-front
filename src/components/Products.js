@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../style.css';
 
-const MySelect = props => {
+const MySelect = (props) => {
   return (
     <select onClick={props.onClick} className="select">
       {props.options.map((e, i) => {
@@ -14,15 +14,16 @@ const MySelect = props => {
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
-  let act = props.arr[2];
-
+  const [filteredData, setFilteredData, act,setProduct]=[...props.arr];
+  //let act = props.arr[2];
+console.log(filteredData)
   const removeItem = (imgUrl, action) => {
-    const newObject = props.arr[0].filter(prod => prod.imgUrl != imgUrl);
-    if (action == 'წაშლა') props.arr[1](newObject);
+    const newObject = filteredData.filter(prod => prod.imgUrl != imgUrl);
+    if (action == 'წაშლა') setProduct(newObject);
   };
 
   const priceChanged = title => {
-    const newObject = props.arr[0].filter(prod => prod.imgUrl != activeInput);
+    const newObject = filteredData.filter(prod => prod.imgUrl != activeInput);
     const obj = {
       imgUrl: activeInput,
       price: newPrice,
@@ -30,13 +31,12 @@ const Products = props => {
       date: (new Date()).toString()
     };
     newObject.unshift(obj);
-    props.arr[1](newObject);
+    setProduct(newObject);
   };
 
   const Sort = e => {
     let value = e.currentTarget.value;
-    let arr = props.arr[0];
-    console.log('5' > '50');
+    let arr = [...filteredData];
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
     else if (value == 'ფასით - მაღლიდან დაბლა')
@@ -47,7 +47,8 @@ const Products = props => {
       arr.sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0));
     else if (value == 'თარიღით - ძველიდან ახლისკენ')
       arr.sort((a, b) => (a.date > b.date ? 1 : b.date > a.date ? -1 : 0));
-    props.arr[1](arr);
+
+    setFilteredData(arr)
   };
 
   return (
@@ -66,7 +67,7 @@ const Products = props => {
             ]}
           />
         </div>
-        {props.arr[0].map((e, i) => {
+        {filteredData.map((e, i) => {
           return (
             <div
               className={

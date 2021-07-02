@@ -69,6 +69,13 @@ const App = () => {
     setFilteredData(result);
   };
 
+  const setActiveMenuOptioni = e => {
+    setActiveMenuOption(2)
+  }
+  const setFilteredDatas = e => {
+    setFilteredData(e)
+  }
+
   return (
     <Router>
       <SideNav
@@ -138,10 +145,10 @@ const App = () => {
 
       <Switch>
         <Route path="/admin">
-          <Admin arr={[addProduct, filteredData, setProduct]} />
+          <Admin addProduct={addProduct} arr={[filteredData,setFilteredData,'წაშლა',setProduct]} />
         </Route>
         <Route path="/products">
-          <Products arr={[filteredData, setProduct, 'ყიდვა']} />
+          <Products arr={[filteredData, setFilteredData, 'ყიდვა',setProduct]} />
         </Route>
         <Route path="/delivery">
           <Delivery />
@@ -183,7 +190,7 @@ export const Admin = props => {
       <form
         onSubmit={e => {
           e.preventDefault();
-          props.arr[0]([imgUrl, title, price]);
+          props.addProduct([imgUrl, title, price]);
         }}
       >
         <label>პროდუქტის დამატება</label>
@@ -217,7 +224,7 @@ export const Admin = props => {
         <button>დამატება</button>
       </form>
       <div id="adminDelText">პროდუქტის წაშლა ან ფასის შეცვლა</div>
-      <Products arr={[props.arr[1], props.arr[2], 'წაშლა']} />
+      <Products arr={[...props.arr]} />
     </div>
   );
 };
