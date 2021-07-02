@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../style.css';
 
-const MySelect = (props) => {
+const MySelect = props => {
   return (
-    <select onClick={props.onClick} className="select">
+    <select
+      onClick={e => props.onClick(e.currentTarget.value)}
+      className="select"
+    >
       {props.options.map((e, i) => {
         return <option value={e}>{e}</option>;
       })}
@@ -11,12 +14,21 @@ const MySelect = (props) => {
   );
 };
 
+
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
-  const [filteredData, setFilteredData, act,setProduct]=[...props.arr];
-  //let act = props.arr[2];
-console.log(filteredData)
+  const [sortValue, setSortValue] = useState('');
+  const [filteredData, setFilteredData, act, products, setProduct] = [
+    ...props.arr
+  ];
+
+  useEffect(() => {
+    const newObject = [...products];
+    let sortedObj = () => Sort(sortValue);
+    setFilteredData(sortedObj);
+  }, [products]);
+
   const removeItem = (imgUrl, action) => {
     const newObject = filteredData.filter(prod => prod.imgUrl != imgUrl);
     if (action == 'წაშლა') setProduct(newObject);
@@ -28,15 +40,15 @@ console.log(filteredData)
       imgUrl: activeInput,
       price: newPrice,
       title: title,
-      date: (new Date()).toString()
+      date: new Date().toString()
     };
     newObject.unshift(obj);
     setProduct(newObject);
   };
 
-  const Sort = e => {
-    let value = e.currentTarget.value;
-    let arr = [...filteredData];
+  const Sort = value => {
+    let arr = [...products];
+    setSortValue(value);
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
     else if (value == 'ფასით - მაღლიდან დაბლა')
@@ -44,11 +56,12 @@ console.log(filteredData)
     else if (value == 'დასახელების მიხედვით ა-ჰ')
       arr.sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0));
     else if (value == 'თარიღით - ახლიდან ძველისკენ')
-      arr.sort((a, b) => (a.date < b.date ? 1 : b.date < a.date ? -1 : 0));
+      arr.sort((a, b) => (new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : new Date(b.date).getTime() < new Date(a.date).getTime() ? -1 : 0));
     else if (value == 'თარიღით - ძველიდან ახლისკენ')
-      arr.sort((a, b) => (a.date > b.date ? 1 : b.date > a.date ? -1 : 0));
+      arr.sort((a, b) => (new Date(a.date).getTime() > new Date(b.date).getTime() ? 1 : new Date(b.date).getTime() > new Date(a.date).getTime() ? -1 : 0));
 
-    setFilteredData(arr)
+    setFilteredData(arr);
+    return arr;
   };
 
   return (

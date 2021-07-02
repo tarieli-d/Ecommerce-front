@@ -23,13 +23,7 @@ const App = () => {
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
 
-  useEffect(() => {
-    setFilteredData(
-      products.filter(data => {
-        return data.title.search(searchValue) != -1;
-      })
-    );
-  }, [products]);
+  
 
   function addProduct(arg) {
     let product = {
@@ -145,10 +139,10 @@ const App = () => {
 
       <Switch>
         <Route path="/admin">
-          <Admin addProduct={addProduct} arr={[filteredData,setFilteredData,'წაშლა',setProduct]} />
+          <Admin addProduct={addProduct} arr={[filteredData,setFilteredData,'წაშლა',products,setProduct]} />
         </Route>
         <Route path="/products">
-          <Products arr={[filteredData, setFilteredData, 'ყიდვა',setProduct]} />
+          <Products arr={[filteredData, setFilteredData, 'ყიდვა',products,setProduct]} />
         </Route>
         <Route path="/delivery">
           <Delivery />
