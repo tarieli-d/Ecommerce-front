@@ -18,6 +18,7 @@ const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
   const [sortValue, setSortValue] = useState('');
+  /**Destructuring props */
   const [
     filteredData,
     setFilteredData,
@@ -27,17 +28,19 @@ const Products = props => {
     searchValue
   ] = [...props.arr];
 
+  /**when products array is modified in some form:deleted,changed price or added product to,filteredData array should be amended accordingly by invoking Sort function.filteredData array alike products array is displayed on products page,products array is not,it just keeps products info and gives them to filteredData when they need to be displayed */
   useEffect(() => {
     const newObject = [...products];
     let sortedObj = () => Sort(sortValue);
     setFilteredData(sortedObj);
   }, [products]);
 
+  /**when product delete button is clicked in admin panel invoke this func */
   const removeItem = (imgUrl, action) => {
     const newObject = filteredData.filter(prod => prod.imgUrl != imgUrl);
     if (action == 'წაშლა') setProduct(newObject);
   };
-
+/**when price change button is clicked in admin panel invoke this func */
   const priceChanged = title => {
     const newObject = filteredData.filter(prod => prod.imgUrl != activeInput);
     const obj = {
@@ -50,8 +53,10 @@ const Products = props => {
     setProduct(newObject);
   };
 
+  /*dalageba tarigit,fasit(zrdadobit an klebadobit) searchValue da sortValue gatvaliswinebit */
   const Sort = value => {
     let arr = [...products].filter(data => data.title.includes(searchValue));
+    /**set which sort option is picked,when useEffect spots changes in products array it calls this function with sortValue,to sort products array and save sorted data to filteredData array with respect to sortValue and searchValue*/
     setSortValue(value);
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
@@ -77,6 +82,7 @@ const Products = props => {
       );
 
     setFilteredData(arr);
+   /**return sorted products to useEffect,in order to save them to filteredData array */
     return arr;
   };
 
