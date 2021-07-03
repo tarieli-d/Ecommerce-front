@@ -22,15 +22,16 @@ const App = () => {
   const [searchValue, setSearchValue] = useState('');
 
   /**addProduct is invoked when new product is added in admin component */
-  function addProduct(arg) {
+  const addProduct = arg => {
     let product = {
       imgUrl: arg[0],
       title: arg[1],
-      price: arg[2],
+      category: arg[2],
+      price: arg[3],
       date: new Date().toString()
     };
     setProduct([...products, product]);
-  }
+  };
 
   /**open left side navbar or close it*/
   const openCloseNav = e => {

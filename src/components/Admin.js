@@ -1,41 +1,66 @@
 import React, { useState } from 'react';
-import { FaLink, FaMoneyBillAlt } from 'react-icons/fa';
+import {
+  FaLink,
+  FaMoneyBillAlt,
+  FaRegFileAlt,
+  FaGripVertical
+} from 'react-icons/fa';
 import Products from './Products';
+import MySelect from './MySelect';
 
 const Admin = props => {
   const [imgUrl, setImgUrl] = useState('');
   const [price, setPrice] = useState('');
   const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
 
-  const handleChange = e => {
-    let val = e.currentTarget.value;
-    if (e.currentTarget.className == 'url') setImgUrl(val);
-    else if (e.currentTarget.className == 'title') setTitle(val);
-    else setPrice(val);
+  const handleChange = (...rest) => {
+    if (['ყველა', 'კაცი', 'ქალი', 'ბავშვი'].includes(rest[0]) == true) {
+      console.log(rest[0]);
+      setCategory(rest[0]);
+      return;
+    }
+    console.log(rest[1]);
+    if (rest[0] == 'url') setImgUrl(rest[1]);
+    else if (rest[0] == 'title') setTitle(rest[1]);
+    else if (rest[0] == 'price') setPrice(rest[1]);
   };
   return (
     <div className="common admin">
       <form
         onSubmit={e => {
           e.preventDefault();
-          props.addProduct([imgUrl, title, price]);
+          props.addProduct([imgUrl, title, category, price]);
         }}
       >
         <label>პროდუქტის დამატება</label>
-        <div>
-          {<FaLink />}
-          <input
-            className="url"
-            onChange={handleChange}
-            value={imgUrl}
-            placeholder="Image url"
+
+        <div className="addCategory">
+          {<FaGripVertical />}
+          <span>კატეგორია:</span>{' '}
+          <MySelect
+            onClick={handleChange}
+            options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
           />
         </div>
         <div>
           {<FaLink />}
           <input
+            className="url"
+            onChange={e =>
+              handleChange(e.currentTarget.className, e.currentTarget.value)
+            }
+            value={imgUrl}
+            placeholder="Image url"
+          />
+        </div>
+        <div>
+          {<FaRegFileAlt />}
+          <input
             className="title"
-            onChange={handleChange}
+            onChange={e =>
+              handleChange(e.currentTarget.className, e.currentTarget.value)
+            }
             value={title}
             placeholder="Title"
           />
@@ -44,7 +69,9 @@ const Admin = props => {
           {<FaMoneyBillAlt />}
           <input
             className="price"
-            onChange={handleChange}
+            onChange={e =>
+              handleChange(e.currentTarget.className, e.currentTarget.value)
+            }
             value={price}
             placeholder="Price"
           />
