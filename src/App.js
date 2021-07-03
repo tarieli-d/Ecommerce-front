@@ -40,7 +40,7 @@ const App = () => {
     if (e.currentTarget.className != 'closebtn') setSidenavWidth('100%');
     else setSidenavWidth('0px');
   };
-/**when we type something in searchBar filter products array and save to filteredData,which is displayed on screen*/
+  /**when we type something in searchBar filter products array and save to filteredData,which is displayed on screen*/
   const handleSearch = e => {
     let value = '',
       result = [];

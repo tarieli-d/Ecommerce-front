@@ -318,15 +318,15 @@ a {
 
 /*products page content*/
 .main {
-  flex:auto;
+  flex: auto;
   width: 90%;
   padding: 2rem 0 5rem 0;
   gap: 2rem;
-  display:flex;
+  display: flex;
   justify-content: center;
   box-sizing: border-box;
 }
-.products{
+.products {
   display: grid;
   grid-template-columns: repeat(auto-fill, 240px);
   justify-content: center;
@@ -343,7 +343,7 @@ a {
   transition: 2s;
   transform-style: preserve-3d;
   background: white;
-  pointer-events: none; 
+  pointer-events: none;
 }
 .sort {
   grid-column: 1 / -1;
@@ -356,19 +356,19 @@ a {
   background: white;
   color: rgb(61, 66, 71);
 }
-.categoried{
+.categoried {
   width: 15%;
   height: 3rem;
   align-self: flex-start;
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: .3rem;
+  row-gap: 0.3rem;
 }
-.categoried span{
+.categoried span {
   font: 1rem 800;
 }
-.categoried .select{
+.categoried .select {
   width: 100%;
   text-indent: 1px;
 }
@@ -381,7 +381,7 @@ a {
   cursor: pointer;
   background: white;
   text-align: center;
-  padding:.1rem;
+  padding: 0.1rem;
   font: 1.3rem Verdana, sans-serif;
 }
 

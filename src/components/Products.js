@@ -18,6 +18,7 @@ const Products = props => {
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
   const [sortValue, setSortValue] = useState('');
+  const [chosenCategory, setChosenCategory] = useState('');
   /**Destructuring props */
   const [
     filteredData,
@@ -37,16 +38,17 @@ const Products = props => {
 
   /**when product delete button is clicked in admin panel invoke this func */
   const removeItem = (imgUrl, action) => {
-    const newObject = filteredData.filter(prod => prod.imgUrl != imgUrl);
+    const newObject = products.filter(prod => prod.imgUrl != imgUrl);
     if (action == 'წაშლა') setProduct(newObject);
   };
   /**when price change button is clicked in admin panel invoke this func */
   const priceChanged = title => {
-    const newObject = filteredData.filter(prod => prod.imgUrl != activeInput);
+    const newObject = products.filter(prod => prod.imgUrl != activeInput);
     const obj = {
       imgUrl: activeInput,
       price: newPrice,
       title: title,
+      category: chosenCategory,
       date: new Date().toString()
     };
     newObject.unshift(obj);
@@ -55,15 +57,27 @@ const Products = props => {
 
   /*dalageba tarigit,fasit(zrdadobit an klebadobit) searchValue da sortValue gatvaliswinebit */
   const Sort = value => {
-    let arr = [...products].filter(data => data.title.includes(searchValue));
+    let arr;
+    if (value.length > 10) {
+      setSortValue(value);
+      arr = [...products].filter(
+        data =>
+          data.title.includes(searchValue) &&
+          data.category.includes(chosenCategory)
+      );
+    } else {
+      arr = [...products].filter(data => data.title.includes(searchValue));
+      if (value == 'ყველა') {
+        setChosenCategory('');
+        arr = arr.filter(prod => prod);
+      } else if (value == 'ბავშვი' || value == 'ქალი' || value == 'კაცი') {
+        setChosenCategory(value);
+        arr = arr.filter(prod => prod.category == value);
+        value = sortValue;
+      }
+    }
     /**set which sort option is picked,when useEffect spots changes in products array it calls this function with sortValue,to sort products array and save sorted data to filteredData array with respect to sortValue and searchValue*/
-    if(value.length>10)setSortValue(value);
-    if (value == 'ყველა') arr = arr.filter(prod=>prod);
-    else if (value == 'ბავშვი' || value == 'ქალი' || value == 'კაცი')
-      arr = arr.filter(prod => prod.category == value);
- 
-    
-      
+
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
     else if (value == 'ფასით - მაღლიდან დაბლა')
