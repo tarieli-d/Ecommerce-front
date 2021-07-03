@@ -318,14 +318,20 @@ a {
 
 /*products page content*/
 .main {
-  flex: auto;
-  width: 85%;
+  flex:auto;
+  width: 90%;
   padding: 2rem 0 5rem 0;
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, 240px);
+  gap: 2rem;
+  display:flex;
   justify-content: center;
   box-sizing: border-box;
+}
+.products{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 240px);
+  justify-content: center;
+  grid-gap: 2rem;
+  width: 85%;
 }
 .product {
   display: flex;
@@ -337,32 +343,45 @@ a {
   transition: 2s;
   transform-style: preserve-3d;
   background: white;
-  pointer-events: none;
+  pointer-events: none; 
 }
-
 .sort {
   grid-column: 1 / -1;
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 0.2rem;
-  width: 100%;
   height: 3rem;
-  margin-top: 1rem;
-  margin-bottom: -1rem;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   background: white;
   color: rgb(61, 66, 71);
 }
+.categoried{
+  width: 15%;
+  height: 3rem;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: .3rem;
+}
+.categoried span{
+  font: 1rem 800;
+}
+.categoried .select{
+  width: 100%;
+  text-indent: 1px;
+}
 .select {
   color: rgba(13, 120, 207);
-  width:/*91vw*/ 35%;
-  text-indent: 1rem;
+  width:/*91vw*/ 45%;
   height: 80%;
   border: 0.1rem rgb(196, 193, 193, 0.5) solid;
   outline: none;
   cursor: pointer;
   background: white;
+  text-align: center;
+  padding:.1rem;
   font: 1.3rem Verdana, sans-serif;
 }
 

@@ -40,7 +40,7 @@ const Products = props => {
     const newObject = filteredData.filter(prod => prod.imgUrl != imgUrl);
     if (action == 'წაშლა') setProduct(newObject);
   };
-/**when price change button is clicked in admin panel invoke this func */
+  /**when price change button is clicked in admin panel invoke this func */
   const priceChanged = title => {
     const newObject = filteredData.filter(prod => prod.imgUrl != activeInput);
     const obj = {
@@ -57,7 +57,13 @@ const Products = props => {
   const Sort = value => {
     let arr = [...products].filter(data => data.title.includes(searchValue));
     /**set which sort option is picked,when useEffect spots changes in products array it calls this function with sortValue,to sort products array and save sorted data to filteredData array with respect to sortValue and searchValue*/
-    setSortValue(value);
+    if(value.length>10)setSortValue(value);
+    if (value == 'ყველა') arr = arr.filter(prod=>prod);
+    else if (value == 'ბავშვი' || value == 'ქალი' || value == 'კაცი')
+      arr = arr.filter(prod => prod.category == value);
+ 
+    
+      
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
     else if (value == 'ფასით - მაღლიდან დაბლა')
@@ -82,65 +88,77 @@ const Products = props => {
       );
 
     setFilteredData(arr);
-   /**return sorted products to useEffect,in order to save them to filteredData array */
+    /**return sorted products to useEffect,in order to save them to filteredData array */
     return arr;
   };
 
   return (
     <>
       <div className="main">
-        <div className="sort">
-          <span>დალაგება: </span>{' '}
+        <div className="categoried">
+          <span>კატეგორია</span>{' '}
           <MySelect
             onClick={Sort}
-            options={[
-              'ფასით - დაბლიდან მაღლა',
-              'ფასით - მაღლიდან დაბლა',
-              'დასახელების მიხედვით ა-ჰ',
-              'თარიღით - ძველიდან ახლისკენ',
-              'თარიღით - ახლიდან ძველისკენ'
-            ]}
+            options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
           />
         </div>
-        {filteredData.map((e, i) => {
-          return (
-            <div
-              className={
-                act != 'წაშლა' ? 'product animated' : 'product notAnimated'
-              }
-            >
-              <div className="top">
-                <img key={i} src={e.imgUrl} />
+        <div className="products">
+          <div className="sort">
+            <span>დალაგება: </span>{' '}
+            <MySelect
+              onClick={Sort}
+              options={[
+                'ფასით - დაბლიდან მაღლა',
+                'ფასით - მაღლიდან დაბლა',
+                'დასახელების მიხედვით ა-ჰ',
+                'თარიღით - ძველიდან ახლისკენ',
+                'თარიღით - ახლიდან ძველისკენ'
+              ]}
+            />
+          </div>
+
+          {filteredData.map((e, i) => {
+            return (
+              <div
+                className={
+                  act != 'წაშლა' ? 'product animated' : 'product notAnimated'
+                }
+              >
+                <div className="top">
+                  <img key={i} src={e.imgUrl} />
+                </div>
+                <div className="bottom">
+                  <span>{e.title}</span>
+                  <span>
+                    <input
+                      className={e.imgUrl}
+                      title={e.title}
+                      onChange={e => {
+                        setNewPrice(e.currentTarget.value);
+                        setActiveInput(e.currentTarget.className);
+                      }}
+                      value={activeInput == e.imgUrl ? newPrice : ''}
+                      placeholder={`${e.price} ლარი`}
+                    />
+                    <button onClick={() => priceChanged(e.title)}>
+                      შეცვლა
+                    </button>
+                  </span>
+                  <button
+                    style={
+                      props.arr[2] == 'წაშლა'
+                        ? { background: 'red' }
+                        : { background: 'green' }
+                    }
+                    onClick={() => removeItem(e.imgUrl, props.arr[2])}
+                  >
+                    {props.arr[2]}
+                  </button>
+                </div>
               </div>
-              <div className="bottom">
-                <span>{e.title}</span>
-                <span>
-                  <input
-                    className={e.imgUrl}
-                    title={e.title}
-                    onChange={e => {
-                      setNewPrice(e.currentTarget.value);
-                      setActiveInput(e.currentTarget.className);
-                    }}
-                    value={activeInput == e.imgUrl ? newPrice : ''}
-                    placeholder={`${e.price} ლარი`}
-                  />
-                  <button onClick={() => priceChanged(e.title)}>შეცვლა</button>
-                </span>
-                <button
-                  style={
-                    props.arr[2] == 'წაშლა'
-                      ? { background: 'red' }
-                      : { background: 'green' }
-                  }
-                  onClick={() => removeItem(e.imgUrl, props.arr[2])}
-                >
-                  {props.arr[2]}
-                </button>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </>
   );
