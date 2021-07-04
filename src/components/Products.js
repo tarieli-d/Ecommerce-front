@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MySelect from './MySelect';
+import Slider from './Slider';
 import '../style.css';
+
 
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
@@ -103,6 +105,7 @@ const Products = props => {
             onClick={Sort}
             options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
           />
+          <Slider/>
         </div>
         <div className="products">
           <div className="sort">
