@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
   
@@ -6,13 +6,13 @@ const Slider = () => {
   
   // Our States
   const [value, setValue] =  React.useState([2,10]);
-  
+  console.log(value[0])
   // Changing State when volume increases/decreases
-  const rangeSelector = (event, newValue) => {
+  /*const rangeSelector = (event, newValue) => {
     setValue(newValue);
     console.log(newValue)
-  };
-  
+  };*/
+/*
   return (
     <div style={{
       margin: 'auto',
@@ -33,4 +33,4 @@ const Slider = () => {
   );
 }
   
-export default Slider;
+export default Slider;*/

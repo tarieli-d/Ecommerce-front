@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MySelect from './MySelect';
-import Slider from './Slider';
 import '../style.css';
-
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 const Products = props => {
   const [newPrice, setNewPrice] = useState('');
@@ -18,6 +18,19 @@ const Products = props => {
     setProduct,
     searchValue
   ] = [...props.arr];
+
+  const [value, setValue] = useState([2, 10]);
+  const rangeSelector = (event, newValue) => {
+    setValue(newValue);
+    console.log(newValue);
+    let sortedObj = [];
+    sortedObj = Sort(sortValue);
+    console.log(sortedObj);
+    sortedObj = sortedObj.filter(
+      data => data.price >= newValue[0] && data.price <= newValue[1]
+    );
+    setFilteredData(sortedObj);
+  };
 
   /**when products array is modified in some form:deleted,changed price or added product to,filteredData array should be amended accordingly by invoking Sort function.filteredData array alike products array is displayed on products page,products array is not,it just keeps products info and gives them to filteredData when they need to be displayed */
   useEffect(() => {
@@ -105,7 +118,16 @@ const Products = props => {
             onClick={Sort}
             options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
           />
-          <Slider/>
+          <div className="slider">
+            <Typography id="range-slider" gutterBottom>
+              გაფილტრვა:
+            </Typography>
+            <Slider
+              value={value}
+              onChange={rangeSelector}
+              valueLabelDisplay="auto"
+            />
+          </div>
         </div>
         <div className="products">
           <div className="sort">
