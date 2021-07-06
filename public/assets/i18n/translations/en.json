@@ -11,6 +11,7 @@
   "contact_address1": "java street",
   "contact_address2": " Tbilisi,Georgia",
   "category": "Category",
+  "sort": "Sort by",
   "filtrate": "Filtrate",
   "range": "Choose appropriate range"
 }
