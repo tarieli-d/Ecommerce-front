@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MySelect from './MySelect';
+import Slideri from './Slider';
 import '../style.css';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -19,13 +20,10 @@ const Products = props => {
     searchValue
   ] = [...props.arr];
 
-  const [value, setValue] = useState([2, 10]);
-  const rangeSelector = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue);
+  const rangeSelector = (newValue) => {
+    console.log(newValue[0]+' '+1);
     let sortedObj = [];
     sortedObj = Sort(sortValue);
-    console.log(sortedObj);
     sortedObj = sortedObj.filter(
       data => data.price >= newValue[0] && data.price <= newValue[1]
     );
@@ -119,15 +117,16 @@ const Products = props => {
             options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
           />
           <div className="slider">
-            <Typography id="range-slider" gutterBottom>
+            {/*<Typography id="range-slider" gutterBottom>
               გაფილტრვა:
             </Typography>
             <Slider
               value={value}
               onChange={rangeSelector}
               valueLabelDisplay="auto"
-            />
-          </div>
+      />*/}
+     <Slideri rangeSelector={rangeSelector} />
+           </div>
         </div>
         <div className="products">
           <div className="sort">

@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import '../style.css';
 
 const Menu = props => {
-  console.log(props)
   let setSidenavWidth = props.arr[0],
     activeMenuOption = props.arr[1],
     setActiveMenuOption = props.arr[2];
