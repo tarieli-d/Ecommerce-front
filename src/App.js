@@ -12,6 +12,9 @@ import Menu from './components/Menu.js';
 import SideNav from './components/Sidenav.js';
 import Admin from './components/Admin.js';
 import productsArray from './components/constants.js';
+import './i18n';
+import { useTranslation } from 'react-i18next';
+
 
 const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
@@ -20,6 +23,7 @@ const App = () => {
   const [filteredData, setFilteredData] = useState(products);
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
+  const { t, i18n } = useTranslation()
 
   /**addProduct is invoked when new product is added in admin component */
   const addProduct = arg => {
@@ -117,7 +121,7 @@ const App = () => {
               }}
             >
               <FaUserAlt />
-              <span>Admin</span>
+              <span>{t('hello.label')}</span>
             </Link>
           </div>
         </div>
