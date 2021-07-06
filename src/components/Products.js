@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import MySelect from './MySelect';
 import Slideri from './Slider';
 import '../style.css';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import { useTranslation } from 'react-i18next';
 
 const Products = props => {
+  const { t, i18n } = useTranslation();
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
   const [sortValue, setSortValue] = useState('');
@@ -20,8 +20,7 @@ const Products = props => {
     searchValue
   ] = [...props.arr];
 
-  const rangeSelector = (newValue) => {
-    console.log(newValue[0]+' '+1);
+  const rangeSelector = newValue => {
     let sortedObj = [];
     sortedObj = Sort(sortValue);
     sortedObj = sortedObj.filter(
@@ -111,26 +110,18 @@ const Products = props => {
     <>
       <div className="main">
         <div className="categoried">
-          <span>კატეგორია</span>{' '}
+          <span>{t('category')}</span>{' '}
           <MySelect
             onClick={Sort}
             options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
           />
           <div className="slider">
-            {/*<Typography id="range-slider" gutterBottom>
-              გაფილტრვა:
-            </Typography>
-            <Slider
-              value={value}
-              onChange={rangeSelector}
-              valueLabelDisplay="auto"
-      />*/}
-     <Slideri rangeSelector={rangeSelector} />
-           </div>
+            <Slideri rangeSelector={rangeSelector} />
+          </div>
         </div>
         <div className="products">
           <div className="sort">
-            <span>დალაგება: </span>{' '}
+            <span>{t('sort')}: </span>{' '}
             <MySelect
               onClick={Sort}
               options={[
@@ -149,9 +140,10 @@ const Products = props => {
                 className={
                   act != 'წაშლა' ? 'product animated' : 'product notAnimated'
                 }
+                key={i}
               >
                 <div className="top">
-                  <img key={i} src={e.imgUrl} />
+                  <img src={e.imgUrl} />
                 </div>
                 <div className="bottom">
                   <span>{e.title}</span>

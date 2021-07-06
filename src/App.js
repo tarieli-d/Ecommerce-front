@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { FaSearch, FaBars, FaUserAlt } from 'react-icons/fa';
 import { Wave } from 'react-animated-text';
@@ -16,7 +16,6 @@ import './i18n';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 
-
 const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
   const [sidenavWidth, setSidenavWidth] = useState('0px');
@@ -24,7 +23,7 @@ const App = () => {
   const [filteredData, setFilteredData] = useState(products);
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
 
   /**addProduct is invoked when new product is added in admin component */
   const addProduct = arg => {
@@ -67,7 +66,6 @@ const App = () => {
   };
 
   return (
-
     <Router>
       <SideNav
         arr={[
@@ -123,12 +121,11 @@ const App = () => {
               }}
             >
               <FaUserAlt />
-  
-              <span>{t('admin')}</span>
 
+              <span>{t('admin')}</span>
             </Link>
-            <LanguageSelector/>
           </div>
+          <LanguageSelector />
         </div>
         <div className="menu">
           <Menu
@@ -178,9 +175,7 @@ const App = () => {
       </Switch>
 
       <footer>
-        <div className="copyright">
-        {t('copyright')}
-        </div>
+        <div className="copyright">{t('copyright')}</div>
       </footer>
     </Router>
   );

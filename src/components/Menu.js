@@ -1,10 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import '../style.css';
 
 const Menu = props => {
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
   let setSidenavWidth = props.arr[0],
     activeMenuOption = props.arr[1],
     setActiveMenuOption = props.arr[2];

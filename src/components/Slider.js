@@ -1,11 +1,12 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-  
-const Slideri = (props) => {
-  
+import { useTranslation } from 'react-i18next';
+
+const Slideri = props => {
+  const { t, i18n } = useTranslation();
   // Our States
-  const [value, setValue] =  useState([0,99]);
+  const [value, setValue] = useState([0, 99]);
   // Changing State when volume increases/decreases
   const rangeSelector = (event, newValue) => {
     setValue(newValue);
@@ -13,24 +14,28 @@ const Slideri = (props) => {
   };
 
   return (
-    <div style={{
-      margin: 'auto',
-      display: 'block',
-      width: 'fit-content'
-    }}>
-      <h3>ფილტრაცია</h3>
+    <div
+      style={{
+        margin: 'auto',
+        display: 'block',
+        width: 'fit-content'
+      }}
+    >
+      <h3>{t('filtrate')}</h3>
       <Typography id="range-slider" gutterBottom>
-        შეარჩიეთ სასურველი დიაპაზონი:
+        {t('range')}
       </Typography>
       <Slider
-        style={{color:'red'}}
+        style={{ color: 'red' }}
         value={value}
         onChange={rangeSelector}
         valueLabelDisplay="auto"
       />
-       <p>{value[0]}-დან  /  {value[1]}-მდე </p>
+      <p>
+        {value[0]}-დან / {value[1]}-მდე{' '}
+      </p>
     </div>
   );
-}
-  
+};
+
 export default Slideri;

@@ -8,7 +8,11 @@ const MySelect = props => {
       className="select"
     >
       {props.options.map((e, i) => {
-        return <option value={e}>{e}</option>;
+        return (
+          <option key={i} value={e}>
+            {e}
+          </option>
+        );
       })}
     </select>
   );

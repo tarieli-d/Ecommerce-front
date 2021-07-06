@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from './Menu.js';
 import '../style.css';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SideNav = props => {
   const setSidenavWidth = props.arr[0];
