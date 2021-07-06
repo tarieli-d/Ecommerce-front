@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { useTranslation } from 'react-i18next'
 import '../style.css';
 
 const Menu = props => {
+  const { t, i18n } = useTranslation()
   let setSidenavWidth = props.arr[0],
     activeMenuOption = props.arr[1],
     setActiveMenuOption = props.arr[2];
@@ -26,7 +28,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">მთავარი</div>
+        <div className="options">{t('home')}</div>
       </Link>
       <Link
         to="/products"
@@ -40,7 +42,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">პროდუქცია</div>
+        <div className="options">{t('products')}</div>
       </Link>
       <Link
         to="/delivery"
@@ -54,7 +56,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">მიწოდების სერვისი</div>
+        <div className="options">{t('delivery')}</div>
       </Link>
       <Link
         to="/about"
@@ -68,7 +70,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">ჩვენ შესახებ</div>
+        <div className="options">{t('about')}</div>
       </Link>
       <Link
         to="/contact"
@@ -80,7 +82,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">საკონტაქტო ინფორმაცია</div>
+        <div className="options">{t('contact')}</div>
       </Link>
     </>
   );

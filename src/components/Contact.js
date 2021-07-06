@@ -1,7 +1,9 @@
 import React from 'react';
 import '../style.css';
+import { useTranslation } from 'react-i18next';
 
 const Products = () => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="common">
@@ -9,7 +11,7 @@ const Products = () => {
           <div className="icons">
             <i className="fa fa-map-marker" />
             <p>
-              <span>java street</span> Tbilisi,Georgia
+              <span>{t('contact_address1')}</span> {t('contact_address2')}
             </p>
           </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { FaSearch, FaBars, FaUserAlt } from 'react-icons/fa';
 import { Wave } from 'react-animated-text';
@@ -14,6 +14,7 @@ import Admin from './components/Admin.js';
 import productsArray from './components/constants.js';
 import './i18n';
 import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
   };
 
   return (
+
     <Router>
       <SideNav
         arr={[
@@ -121,8 +123,11 @@ const App = () => {
               }}
             >
               <FaUserAlt />
-              <span>{t('hello.label')}</span>
+  
+              <span>{t('admin')}</span>
+
             </Link>
+            <LanguageSelector/>
           </div>
         </div>
         <div className="menu">
@@ -174,7 +179,7 @@ const App = () => {
 
       <footer>
         <div className="copyright">
-          Copyright © 2021. Tariel Duishvili, All Rights Reserved.
+        {t('copyright')}
         </div>
       </footer>
     </Router>
