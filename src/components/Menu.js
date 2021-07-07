@@ -28,7 +28,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">{t('home')}</div>
+        {t('home')}
       </Link>
       <Link
         to="/products"
@@ -42,7 +42,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">{t('products')}</div>
+        {t('products')}
       </Link>
       <Link
         to="/delivery"
@@ -56,7 +56,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">{t('delivery')}</div>
+        {t('delivery')}
       </Link>
       <Link
         to="/about"
@@ -70,7 +70,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">{t('about')}</div>
+        {t('about')}
       </Link>
       <Link
         to="/contact"
@@ -82,7 +82,7 @@ const Menu = props => {
           }
         }}
       >
-        <div className="options">{t('contact')}</div>
+        {t('contact')}
       </Link>
     </>
   );

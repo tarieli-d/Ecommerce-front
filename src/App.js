@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { FaSearch, FaBars, FaUserAlt } from 'react-icons/fa';
 import { Wave } from 'react-animated-text';

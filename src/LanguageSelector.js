@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import MySelect from './components/MySelect';
 
 const LanguageSelector = () => {
   const { t, i18n } = useTranslation();
@@ -10,14 +11,7 @@ const LanguageSelector = () => {
 
   return (
     <div className="langSwitch" onChange={changeLanguage}>
-      <div>
-        <input id="en" type="radio" value="en" name="language" />
-        <label for="en">en</label>
-      </div>
-      <div>
-        <input type="radio" value="ge" name="language" defaultChecked />
-        <label>ge</label>
-      </div>
+      <MySelect options={['en', 'ge']} onClick={() => {}} />
     </div>
   );
 };

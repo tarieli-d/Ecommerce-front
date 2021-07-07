@@ -8,7 +8,7 @@
     "@types/react": "17.0.13",
     "components": "0.1.0",
     "i18next": "20.3.2",
-    "i18next-xhr-backend": "^3.2.2",
+    "i18next-xhr-backend": "3.2.2",
     "react": "17.0.2",
     "react-animated-text": "0.1.4",
     "react-dom": "17.0.2",
