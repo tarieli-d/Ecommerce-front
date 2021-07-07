@@ -58,10 +58,12 @@ const App = () => {
     if (value == '' || typeof e.currentTarget != 'object')
       setSearchResultDisplay('none');
     else setSearchResultDisplay('flex');
-
+    /*replace + (temporarily here and below while searching) with `,coz + breaks search,note that it is not replaced in products or filteredData array,just here for the sake of search funcyion below*/
+    value = value.replace(/\+/g, '`');
     result = products.filter(data => {
-      return data.title.search(value) != -1;
+      return data.title.replace(/\+/g, '`').search(value) != -1;
     });
+
     setFilteredData(result);
   };
 
