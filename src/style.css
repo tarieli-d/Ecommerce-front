@@ -243,6 +243,7 @@ header {
   width: 80%;
   padding: 0 0 0 15%;
   text-align-last: left;
+  background: #094064;
 }
 .langSwitch .select option {
   padding-left: 1rem;
@@ -402,8 +403,11 @@ header .menu a {
   column-gap: 0.2rem;
   height: 3rem;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  background: rgb(0 0 0 / 90%);
+  background: #094064;
   color: rgb(61, 66, 71);
+}
+.sort .select {
+  background: #094064;
 }
 .categoried {
   width: 18%;
@@ -420,12 +424,14 @@ header .menu a {
   font-weight: 900;
 }
 .categoried .select {
+  width: 100%;
   text-indent: 1px;
+  background: rgb(39, 85, 87);
 }
 .slider {
   margin-top: auto;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  background: rgb(0 0 0 / 90%);
+  background: rgb(18, 120, 179);
   color: white;
   padding: 0 1.6rem 0 1.6rem;
 }
