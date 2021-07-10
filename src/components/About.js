@@ -1,10 +1,14 @@
-import React from "react";
-import "../style.css";
+import React from 'react';
+import '../style.css';
+import { useTranslation } from 'react-i18next';
 
-const About = () =>{
+const About = () => {
+  const { t, i18n } = useTranslation();
   return (
-   <div className='common'>We are Ecommerce company,which provides users with high reliability and quality products </div>
-    
+    <div className="common">
+      <div className="commonContent">{t('about_text')}</div>
+    </div>
   );
-}
+};
+
 export default About;

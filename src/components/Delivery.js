@@ -1,10 +1,13 @@
-import React from "react";
-import "../style.css";
+import React from 'react';
+import '../style.css';
+import { useTranslation } from 'react-i18next';
 
-const Delivery = () =>{
+const Delivery = () => {
+  const { t, i18n } = useTranslation();
   return (
-   <div className='common'>delivery service cost 5 lari.We can deliver products for free if you make purchase with cost of 200 lari or higher</div>
-    
+    <div className="common">
+      <div className="commonContent">{t('delivery_text')}</div>
+    </div>
   );
-}
+};
 export default Delivery;

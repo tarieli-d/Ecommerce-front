@@ -1,64 +1,166 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { FaSearch, FaBars, FaUserAlt } from "react-icons/fa";
-import "./style.css";
-import Products from "./components/Products";
-import Contact from "./components/Contact.js";
-import Delivery from "./components/Delivery.js";
-import About from "./components/About.js";
-import productsArray from "./components/constants.js";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { FaSearch, FaBars, FaUserAlt } from 'react-icons/fa';
+import { Wave } from 'react-animated-text';
+import './style.css';
+import Products from './components/Products';
+import Contact from './components/Contact.js';
+import Delivery from './components/Delivery.js';
+import About from './components/About.js';
+import Main from './components/Main.js';
+import Menu from './components/Menu.js';
+import SideNav from './components/Sidenav.js';
+import Admin from './components/Admin.js';
+import productsArray from './components/constants.js';
+import './i18n';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const App = () => {
-  const [sidenavWidth, setSidenavWidth] = useState("0px");
+  const [activeMenuOption, setActiveMenuOption] = useState(-1);
+  const [sidenavWidth, setSidenavWidth] = useState('0px');
   const [products, setProduct] = useState(productsArray);
+  const [filteredData, setFilteredData] = useState(products);
+  const [searchResultDisplay, setSearchResultDisplay] = useState('none');
+  const [searchValue, setSearchValue] = useState('');
+  const { t, i18n } = useTranslation();
 
-  function addProduct(arg) {
-    console.log(products);
-    let product = { imgUrl: arg[0], price: arg[1] };
+  /**addProduct is invoked when new product is added in admin component */
+  const addProduct = arg => {
+    let product = {
+      imgUrl: arg[0],
+      title: arg[1],
+      category: arg[2],
+      price: arg[3],
+      date: new Date().toString()
+    };
     setProduct([...products, product]);
-  }
+  };
 
   /**open left side navbar or close it*/
-  const openCloseNav = (e) => {
+  const openCloseNav = e => {
     e.stopPropagation();
-    if (e.currentTarget.className != "closebtn") setSidenavWidth("300px");
-    else setSidenavWidth("0px");
+    if (e.currentTarget.className != 'closebtn') setSidenavWidth('100%');
+    else setSidenavWidth('0px');
   };
+  /**when we type something in searchBar filter products array and save to filteredData,which is displayed on screen*/
+  const handleSearch = e => {
+    let value = '',
+      result = [];
+    if (typeof e.currentTarget == 'object')
+      value = e.currentTarget.value.toLowerCase();
+    else {
+      value = e.toLowerCase();
+    }
+
+    setSearchValue(value);
+
+    if (value == '' || typeof e.currentTarget != 'object')
+      setSearchResultDisplay('none');
+    else setSearchResultDisplay('flex');
+    /*replace + (temporarily here and below while searching) with `,coz + breaks search,note that it is not replaced in products or filteredData array,just here for the sake of search funcyion below*/
+    value = value.replace(/\+/g, '`');
+    result = products.filter(data => {
+      return data.title.replace(/\+/g, '`').search(value) != -1;
+    });
+
+    setFilteredData(result);
+  };
+
   return (
     <Router>
-      <SideNav arr={[sidenavWidth, openCloseNav]} />
+      <SideNav
+        arr={[
+          setSidenavWidth,
+          activeMenuOption,
+          setActiveMenuOption,
+          sidenavWidth,
+          openCloseNav
+        ]}
+      />
       <header>
         <div className="headerTop">
           <div id="menuIcon">
             <FaBars onClick={openCloseNav} />
-            <span>MyShop</span>
+            <span>
+              <Wave speed={4} text="Wellcome" effect="fadeOut" />
+            </span>
           </div>
 
           <div id="searchBar">
             <span>
-              <input placeholder="Search.." />
+              <input
+                onChange={e => handleSearch(e)}
+                value={searchValue}
+                placeholder="Search product.."
+              />
               <FaSearch className="searchIcon" />
             </span>
+            <div
+              style={{ display: searchResultDisplay }}
+              className="searchResult"
+            >
+              {filteredData.map((value, index) => {
+                return (
+                  <Link
+                    key={index}
+                    to="/products"
+                    value={searchValue}
+                    onClick={() => handleSearch(value.title)}
+                  >
+                    {value.title}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           <div id="admin">
-            <Link to="/admin">
+            <Link
+              to="/admin"
+              onClick={() => {
+                setActiveMenuOption(-1);
+              }}
+            >
               <FaUserAlt />
-              <span>Admin</span>
+
+              <span>{t('admin')}</span>
             </Link>
           </div>
+          <LanguageSelector />
         </div>
         <div className="menu">
-          <Menu />
+          <Menu
+            arr={[setSidenavWidth, activeMenuOption, setActiveMenuOption]}
+          />
         </div>
       </header>
 
       <Switch>
         <Route path="/admin">
-          <Admin addProduct={addProduct} />
+          <Admin
+            addProduct={addProduct}
+            arr={[
+              filteredData,
+              setFilteredData,
+              'წაშლა',
+              products,
+              setProduct,
+              searchValue
+            ]}
+          />
         </Route>
         <Route path="/products">
-          <Products products={products} />
+          <Products
+            arr={[
+              filteredData,
+              setFilteredData,
+              'ყიდვა',
+              products,
+              setProduct,
+              searchValue
+            ]}
+          />
         </Route>
         <Route path="/delivery">
           <Delivery />
@@ -75,133 +177,9 @@ const App = () => {
       </Switch>
 
       <footer>
-        <div className="copyright">
-          ©2021 ყველა უფლება დაცულია. ტარიელ დუიშვილი{" "}
-        </div>
+        <div className="copyright">{t('copyright')}</div>
       </footer>
     </Router>
   );
 };
 export default App;
-
-
-export const Admin = (props) => {
-  const [imgUrl, setImgUrl] = useState("");
-  const [price, setPrice] = useState("");
-  function handleChange(e) {
-    let val = e.currentTarget.value;
-    if (e.currentTarget.className == "url") setImgUrl(val);
-    else setPrice(val);
-  }
-  return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          props.addProduct([imgUrl, price]);
-        }}
-      >
-        <input
-          className="url"
-          onChange={handleChange}
-          value={imgUrl}
-          placeholder="img url.."
-        />
-        <input
-          className="price"
-          onChange={handleChange}
-          value={price}
-          placeholder="price.."
-        />
-        <button>დამატება</button>
-      </form>
-    </div>
-  );
-};
-
-export const Main = () => {
-  return (
-    <div className="common">
-      <img src="https://www.coronainsights.com/wp-content/uploads/2014/11/Welcome.jpg" />
-    </div>
-  );
-};
-
-export const SideNav = (props) => {
-  const styles = {
-    width: props.arr[0],
-  };
-
-  return (
-    <div className="sidenav" style={styles}>
-      <a className="closebtn" onClick={props.arr[1]}>
-        <div id="closeIcon">&times;</div>
-      </a>
-      {/**This component is used two times with different arguments in header,here and below */}
-      <Menu />
-      <Link to="/admin">
-        <div>
-          <span>ადმინის პანელი</span>
-        </div>
-      </Link>   
-    </div>
-  );
-};
-
-const Menu = () => {
-  const [activeMenuOption, setActiveMenuOption] = useState(-1);
-  const Border = "border-bottom";
-  const Style = {
-    /*'borderBottom': '3px solid rgb(35, 167, 75)'*/
-    background: "rgb(12, 136, 185)",
-  };
-  return (
-    <>
-      <Link
-        to="/"
-        style={activeMenuOption == 0 ? Style : {}}
-        onClick={() => {
-          setActiveMenuOption(0);
-        }}
-      >
-        <div className="options">მთავარი</div>
-      </Link>
-      <Link
-        to="/products"
-        style={activeMenuOption == 1 ? Style : {}}
-        onClick={() => {
-          setActiveMenuOption(1);
-        }}
-      >
-        <div className="options">პროდუქცია</div>
-      </Link>
-      <Link
-        to="/delivery"
-        style={activeMenuOption == 2 ? Style : {}}
-        onClick={() => {
-          setActiveMenuOption(2);
-        }}
-      >
-        <div className="options">მიწოდების სერვისი</div>
-      </Link>
-      <Link
-        to="/about"
-        style={activeMenuOption == 3 ? Style : {}}
-        onClick={() => {
-          setActiveMenuOption(3);
-        }}
-      >
-        <div className="options">ჩვენ შესახებ</div>
-      </Link>
-      <Link
-        to="/contact"
-        style={activeMenuOption == 4 ? Style : {}}
-        onClick={() => {
-          setActiveMenuOption(4);
-        }}
-      >
-        <div className="options">საკონტაქტო ინფორმაცია</div>
-      </Link>
-    </>
-  );
-};

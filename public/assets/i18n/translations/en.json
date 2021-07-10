@@ -1,0 +1,17 @@
+{
+  "admin": "Admin",
+  "copyright": "Copyright © 2021. Tariel Duishvili, All Rights Reserved.",
+  "home": "Home",
+  "products": "Products",
+  "delivery": "Delivery service",
+  "about": "About us",
+  "contact": "Contact us",
+  "delivery_text": "delivery service cost 5 lari.We can deliver products for free if you make purchase with cost of 100 lari or higher",
+  "about_text": "We are Ecommerce company,which provides users with high reliability and quality products",
+  "contact_address1": "java street",
+  "contact_address2": " Tbilisi,Georgia",
+  "category": "Category",
+  "sort": "Sort by",
+  "filtrate": "Filtrate",
+  "range": "Choose appropriate range"
+}
