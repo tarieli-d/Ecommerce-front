@@ -11,7 +11,7 @@ const LanguageSelector = () => {
 
   return (
     <div className="langSwitch" onChange={changeLanguage}>
-      <MySelect options={['en', 'ge']} onClick={() => {}} />
+      <MySelect options={['ge', 'en']} onClick={() => {}} />
     </div>
   );
 };

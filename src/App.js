@@ -124,7 +124,7 @@ const App = () => {
             >
               <FaUserAlt />
 
-              <span>{t('admin')}</span>
+              {/*<span>{t('admin')}</span>*/}
             </Link>
           </div>
           <LanguageSelector />
