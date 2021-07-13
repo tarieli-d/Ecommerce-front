@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MySelect from './MySelect';
 import Slideri from './Slider';
 import '../style.css';
@@ -17,7 +18,8 @@ const Products = props => {
     act,
     products,
     setProduct,
-    searchValue
+    searchValue,
+    setItemCount
   ] = [...props.arr];
 
   const rangeSelector = newValue => {
@@ -162,6 +164,7 @@ const Products = props => {
                       შეცვლა
                     </button>
                   </span>
+                  
                   <button
                     style={
                       props.arr[2] == 'წაშლა'
@@ -172,6 +175,12 @@ const Products = props => {
                   >
                     {props.arr[2]}
                   </button>
+                  <span onClick={()=>setItemCount()}>
+                      {' '}
+                      <ShoppingCartIcon
+
+                      />
+                    </span>
                 </div>
               </div>
             );

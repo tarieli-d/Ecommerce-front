@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/runtime": "7.14.6",
     "@material-ui/core": "4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@types/react": "17.0.13",
     "components": "0.1.0",
     "i18next": "20.3.2",

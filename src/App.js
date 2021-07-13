@@ -15,6 +15,9 @@ import productsArray from './components/constants.js';
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
+import Badge from '@material-ui/core/Badge';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 
 const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
@@ -24,7 +27,15 @@ const App = () => {
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
   const { t, i18n } = useTranslation();
-
+  const [popupWindowShow, setPopupWindowShow] = useState('flex');
+  const [itemCount, setItemCount] = React.useState(0);
+  const Style = {
+    display: popupWindowShow
+  };
+  const popupWindow = e => {
+    if (e.currentTarget.className == 'close') setPopupWindowShow('none');
+    else setPopupWindowShow('flex');
+  };
   /**addProduct is invoked when new product is added in admin component */
   const addProduct = arg => {
     let product = {
@@ -78,107 +89,125 @@ const App = () => {
           openCloseNav
         ]}
       />
-      <header>
-        <div className="headerTop">
-          <div id="menuIcon">
-            <FaBars onClick={openCloseNav} />
-            <span>
-              <Wave speed={4} text="Wellcome" effect="fadeOut" />
-            </span>
-          </div>
-
-          <div id="searchBar">
-            <span>
-              <input
-                onChange={e => handleSearch(e)}
-                value={searchValue}
-                placeholder="Search product.."
-              />
-              <FaSearch className="searchIcon" />
-            </span>
-            <div
-              style={{ display: searchResultDisplay }}
-              className="searchResult"
-            >
-              {filteredData.map((value, index) => {
-                return (
-                  <Link
-                    key={index}
-                    to="/products"
-                    value={searchValue}
-                    onClick={() => handleSearch(value.title)}
-                  >
-                    {value.title}
-                  </Link>
-                );
-              })}
+      <div className="popupWindow" style={Style}>
+        <div onClick={popupWindow} className="close">
+          <span>&times;</span>
+        </div>
+        {filteredData.map((e, i) => {
+          return <div>{e.title}</div>;
+        })}
+      </div>
+      <div className="overla" style={{}}>
+        <header>
+          <div className="headerTop">
+            <div id="menuIcon">
+              <FaBars onClick={openCloseNav} />
+              <span>
+                <Wave speed={4} text="Wellcome" effect="fadeOut" />
+              </span>
             </div>
+
+            <div id="searchBar">
+              <span>
+                <input
+                  onChange={e => handleSearch(e)}
+                  value={searchValue}
+                  placeholder="Search product.."
+                />
+                <FaSearch className="searchIcon" />
+              </span>
+              <div
+                style={{ display: searchResultDisplay }}
+                className="searchResult"
+              >
+                {filteredData.map((value, index) => {
+                  return (
+                    <Link
+                      key={index}
+                      to="/products"
+                      value={searchValue}
+                      onClick={() => handleSearch(value.title)}
+                    >
+                      {value.title}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div style={{margin:'.5rem',marginLeft:'auto'}}>
+              <Badge color="secondary" badgeContent={itemCount}>
+                <ShoppingCartIcon />{' '}
+              </Badge>{' '}
+            </div>
+            <div id="admin">
+              <Link
+                to="/admin"
+                onClick={() => {
+                  setActiveMenuOption(-1);
+                }}
+              >
+                <FaUserAlt />
+
+                {/*<span>{t('admin')}</span>*/}
+              </Link>
+            </div>
+
+            <LanguageSelector />
           </div>
-
-          <div id="admin">
-            <Link
-              to="/admin"
-              onClick={() => {
-                setActiveMenuOption(-1);
-              }}
-            >
-              <FaUserAlt />
-
-              {/*<span>{t('admin')}</span>*/}
-            </Link>
+          <div className="menu">
+            <Menu
+              arr={[setSidenavWidth, activeMenuOption, setActiveMenuOption]}
+            />
           </div>
-          <LanguageSelector />
-        </div>
-        <div className="menu">
-          <Menu
-            arr={[setSidenavWidth, activeMenuOption, setActiveMenuOption]}
-          />
-        </div>
-      </header>
+        </header>
 
-      <Switch>
-        <Route path="/admin">
-          <Admin
-            addProduct={addProduct}
-            arr={[
-              filteredData,
-              setFilteredData,
-              'წაშლა',
-              products,
-              setProduct,
-              searchValue
-            ]}
-          />
-        </Route>
-        <Route path="/products">
-          <Products
-            arr={[
-              filteredData,
-              setFilteredData,
-              'ყიდვა',
-              products,
-              setProduct,
-              searchValue
-            ]}
-          />
-        </Route>
-        <Route path="/delivery">
-          <Delivery />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/">
-          <Main />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route path="/admin">
+            <Admin
+              addProduct={addProduct}
+              arr={[
+                filteredData,
+                setFilteredData,
+                'წაშლა',
+                products,
+                setProduct,
+                searchValue,
+                setItemCount
+              ]}
+            />
+          </Route>
+          <Route path="/products">
+            <Products
+              arr={[
+                filteredData,
+                setFilteredData,
+                'ყიდვა',
+                products,
+                setProduct,
+                searchValue,
+                setItemCount
+              ]}
+            />
+          </Route>
+          <Route path="/delivery">
+            <Delivery />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/">
+            <Main />
+          </Route>
+        </Switch>
 
-      <footer>
-        <div className="copyright">{t('copyright')}</div>
-      </footer>
+        <footer>
+          <div className="copyright">{t('copyright')}</div>
+        </footer>
+      </div>
     </Router>
   );
 };
