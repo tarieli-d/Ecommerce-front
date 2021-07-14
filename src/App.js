@@ -98,10 +98,18 @@ const App = () => {
           <span>&times;</span>
         </div>
         {[...cartData].map((e, i) => {
-          return <div className='cartItem' key={i}>{e.title}</div>;
+          return (
+            <div className="cartItem" key={i}>
+              {e.title}
+            </div>
+          );
         })}
       </div>
-      <div className={popupWindowShow == 'flex' ? 'overlay' : ''} style={{}}>
+      <section
+        className={popupWindowShow == 'flex' ? 'overlay2' : 'overlay1'}
+      />
+
+      <div className={popupWindowShow == 'flex' ? 'overlay2' : 'overlay1'}>
         <header>
           <div className="headerTop">
             <div id="menuIcon">
@@ -141,7 +149,7 @@ const App = () => {
 
             <div
               onClick={popupWindow}
-              style={{ margin: '.5rem', marginLeft: 'auto' }}
+              style={{ margin: '.5rem', marginLeft: 'auto', cursor: 'pointer' }}
             >
               <Badge color="secondary" badgeContent={itemCount}>
                 <ShoppingCartIcon />{' '}

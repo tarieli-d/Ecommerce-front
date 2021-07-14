@@ -3,34 +3,53 @@ body {
   margin: 0;
   background-color: rgb(214, 220, 230);
 }
-
-.overlay{
+#root {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
-  filter: blur(8px);
-  opacity: .5;
+  min-height: 100vh;
 }
-.popupWindow{
+.overlay1,
+.overlay2 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+.overlay2 {
   position: fixed;
-  left:5%;
-  top: calc(50% - 200px);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#root > .overlay2 ~ .overlay2 {
+  filter: blur(5px);
+  z-index: 9;
+}
+.popupWindow {
+  position: fixed;
+  top: calc(50% - 100px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  row-gap: 1rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
   font-weight: 900;
-  width: 90%;
   min-height: 100px;
   background: rgb(255, 255, 255);
   color: black;
-  box-shadow: 0 0 0.0rem 0.1rem rgb(199, 194, 187); 
-  z-index: 100;
+  z-index: 99;
+  border: 1px solid #e0d9d9;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: auto;
 }
-.popupWindow .close{
+.popupWindow .close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -41,14 +60,19 @@ body {
   color: white;
   font-size: 3rem;
   cursor: pointer;
+  border: 1px solid black;
 }
-.popupWindow .cartItem{
+.popupWindow .close:hover {
+  background: red;
+}
+.popupWindow .cartItem {
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgb(235, 229, 229);
   width: 90%;
   height: 3rem;
+  border: 1px solid #094064;
 }
 
 /*common css*/
@@ -624,7 +648,7 @@ img {
   font-size: 0.8rem;
   cursor: pointer;
   padding: 0;
-  z-index: 32;
+  z-index: 3;
 }
 .admin .main .bottom span button:hover {
   background: black;
