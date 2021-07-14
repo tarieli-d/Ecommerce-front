@@ -19,7 +19,7 @@ const Products = props => {
     products,
     setProduct,
     searchValue,
-    setItemCount
+    addToCart
   ] = [...props.arr];
 
   const rangeSelector = newValue => {
@@ -167,18 +167,17 @@ const Products = props => {
                   
                   <button
                     style={
-                      props.arr[2] == 'წაშლა'
+                      act == 'წაშლა'
                         ? { background: 'red' }
                         : { background: 'green' }
                     }
-                    onClick={() => removeItem(e.imgUrl, props.arr[2])}
+                    onClick={() => removeItem(e.imgUrl, act)}
                   >
-                    {props.arr[2]}
+                    {act}
                   </button>
-                  <span onClick={()=>setItemCount()}>
+                  <span style={{cursor:'pointer',pointerEvents:'auto'}} onClick={()=>{addToCart(e)}}>
                       {' '}
                       <ShoppingCartIcon
-
                       />
                     </span>
                 </div>

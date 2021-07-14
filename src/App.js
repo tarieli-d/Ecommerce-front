@@ -18,7 +18,6 @@ import LanguageSelector from './LanguageSelector';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-
 const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
   const [sidenavWidth, setSidenavWidth] = useState('0px');
@@ -28,7 +27,8 @@ const App = () => {
   const [searchValue, setSearchValue] = useState('');
   const { t, i18n } = useTranslation();
   const [popupWindowShow, setPopupWindowShow] = useState('flex');
-  const [itemCount, setItemCount] = React.useState(0);
+  const [cartData, setCartData] = useState(new Set());
+  const itemCount = [...cartData].length;
   const Style = {
     display: popupWindowShow
   };
@@ -36,6 +36,10 @@ const App = () => {
     if (e.currentTarget.className == 'close') setPopupWindowShow('none');
     else setPopupWindowShow('flex');
   };
+  const addToCart = e => {
+    setCartData(prev => new Set(prev).add(e));
+  };
+
   /**addProduct is invoked when new product is added in admin component */
   const addProduct = arg => {
     let product = {
@@ -93,11 +97,11 @@ const App = () => {
         <div onClick={popupWindow} className="close">
           <span>&times;</span>
         </div>
-        {filteredData.map((e, i) => {
-          return <div>{e.title}</div>;
+        {[...cartData].map((e, i) => {
+          return <div className='cartItem' key={i}>{e.title}</div>;
         })}
       </div>
-      <div className="overla" style={{}}>
+      <div className={popupWindowShow == 'flex' ? 'overlay' : ''} style={{}}>
         <header>
           <div className="headerTop">
             <div id="menuIcon">
@@ -135,7 +139,10 @@ const App = () => {
               </div>
             </div>
 
-            <div style={{margin:'.5rem',marginLeft:'auto'}}>
+            <div
+              onClick={popupWindow}
+              style={{ margin: '.5rem', marginLeft: 'auto' }}
+            >
               <Badge color="secondary" badgeContent={itemCount}>
                 <ShoppingCartIcon />{' '}
               </Badge>{' '}
@@ -173,7 +180,7 @@ const App = () => {
                 products,
                 setProduct,
                 searchValue,
-                setItemCount
+                addToCart
               ]}
             />
           </Route>
@@ -186,7 +193,7 @@ const App = () => {
                 products,
                 setProduct,
                 searchValue,
-                setItemCount
+                addToCart
               ]}
             />
           </Route>
