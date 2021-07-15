@@ -7,7 +7,6 @@ import {
 } from 'react-icons/fa';
 import Products from './Products';
 import MySelect from './MySelect';
-import '../style.css';
 
 const Admin = props => {
   const [imgUrl, setImgUrl] = useState('');

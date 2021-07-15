@@ -1,5 +1,4 @@
 import React from 'react';
-import '../style.css';
 import { useTranslation } from 'react-i18next';
 
 const Delivery = () => {

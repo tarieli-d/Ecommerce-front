@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useTranslation } from 'react-i18next';
 

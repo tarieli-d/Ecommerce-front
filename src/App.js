@@ -211,7 +211,7 @@ const App = () => {
               arr={[
                 filteredData,
                 setFilteredData,
-                'ყიდვა',
+                'კალათაში',
                 products,
                 setProduct,
                 searchValue,

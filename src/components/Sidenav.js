@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from '../LanguageSelector';
-
 import Menu from './Menu.js';
-import '../style.css';
 
 const SideNav = props => {
   const { t, i18n } = useTranslation();

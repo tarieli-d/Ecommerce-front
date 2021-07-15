@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MySelect from './MySelect';
 import Slideri from './Slider';
-import '../style.css';
 import { useTranslation } from 'react-i18next';
 
 const Products = props => {
@@ -41,7 +40,7 @@ const Products = props => {
   /**when product delete button is clicked in admin panel invoke this func */
   const removeItem = (imgUrl, action) => {
     const newObject = products.filter(prod => prod.imgUrl != imgUrl);
-    if (action == 'წაშლა') setProduct(newObject);
+    setProduct(newObject);
   };
   /**when price change button is clicked in admin panel invoke this func */
   const priceChanged = title => {
@@ -140,7 +139,7 @@ const Products = props => {
             return (
               <div
                 className={
-                  act != 'წაშლა' ? 'product animated' : 'product notAnimated'
+                  act != 'წაშლა' ? 'product notAnimated' : 'product notAnimated'
                 }
                 key={i}
               >
@@ -164,22 +163,25 @@ const Products = props => {
                       შეცვლა
                     </button>
                   </span>
-                  
-                  <button
-                    style={
-                      act == 'წაშლა'
-                        ? { background: 'red' }
-                        : { background: 'green' }
-                    }
-                    onClick={() => removeItem(e.imgUrl, act)}
-                  >
-                    {act}
-                  </button>
-                  <span style={{cursor:'pointer',pointerEvents:'auto'}} onClick={()=>{addToCart(e)}}>
-                      {' '}
-                      <ShoppingCartIcon
-                      />
-                    </span>
+
+                  {act == 'წაშლა' ? (
+                    <button
+                      style={{ background: 'red' }}
+                      onClick={() => removeItem(e.imgUrl, act)}
+                    >
+                      {act}
+                    </button>
+                  ) : (
+                    <button
+                      style={{ background: 'green' }}
+                      onClick={() => {
+                        addToCart(e);
+                      }}
+                    >
+                      <ShoppingCartIcon />
+                      <b>{act}</b>
+                    </button>
+                  )}
                 </div>
               </div>
             );
