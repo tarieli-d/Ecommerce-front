@@ -17,11 +17,9 @@ const Admin = props => {
 
   const handleChange = (...rest) => {
     if (['ყველა', 'კაცი', 'ქალი', 'ბავშვი'].includes(rest[0]) == true) {
-      console.log(rest[0]);
       setCategory(rest[0]);
       return;
     }
-    console.log(rest[1]);
     if (rest[0] == 'url') setImgUrl(rest[1]);
     else if (rest[0] == 'title') setTitle(rest[1]);
     else if (rest[0] == 'price') setPrice(rest[1]);

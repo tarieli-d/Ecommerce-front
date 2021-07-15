@@ -26,9 +26,13 @@ const App = () => {
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
   const { t, i18n } = useTranslation();
-  const [popupWindowShow, setPopupWindowShow] = useState('flex');
+  const [popupWindowShow, setPopupWindowShow] = useState('none');
   const [cartData, setCartData] = useState(new Set());
   const itemCount = [...cartData].length;
+  const cartTotal = [...cartData].reduce(
+    (total, { price = 0 }) => total + price,
+    0
+  );
   const Style = {
     display: popupWindowShow
   };
@@ -39,7 +43,13 @@ const App = () => {
   const addToCart = e => {
     setCartData(prev => new Set(prev).add(e));
   };
-
+  const removeFromCart = item => {
+    setCartData(prev => {
+      let newCart = new Set(prev);
+      newCart.delete(item);
+      return newCart;
+    });
+  };
   /**addProduct is invoked when new product is added in admin component */
   const addProduct = arg => {
     let product = {
@@ -95,19 +105,25 @@ const App = () => {
       />
       <div className="popupWindow" style={Style}>
         <div onClick={popupWindow} className="close">
+          <span>Total:{cartTotal}Lari</span>
+          <Link to="contact">Make order</Link>
           <span>&times;</span>
         </div>
         {[...cartData].map((e, i) => {
           return (
             <div className="cartItem" key={i}>
-              {e.title}
+              <img src={e.imgUrl} />
+              <span>
+                {e.title}({e.price}Lari)
+              </span>
+              <span className="del" onClick={() => removeFromCart(e)}>
+                &times;
+              </span>
             </div>
           );
         })}
       </div>
-      <section
-        className={popupWindowShow == 'flex' ? 'overlay2' : 'overlay1'}
-      />
+      <div className={popupWindowShow == 'flex' ? 'overlay2' : 'overlay1'} />
 
       <div className={popupWindowShow == 'flex' ? 'overlay2' : 'overlay1'}>
         <header>
