@@ -167,7 +167,7 @@ const App = () => {
               onClick={popupWindow}
               style={{ margin: '.5rem', marginLeft: 'auto', cursor: 'pointer' }}
             >
-              <Badge color="secondary" badgeContent={itemCount}>
+              <Badge color="secondary" badgeContent={itemCount} showZero>
                 <ShoppingCartIcon />{' '}
               </Badge>{' '}
             </div>
@@ -179,8 +179,6 @@ const App = () => {
                 }}
               >
                 <FaUserAlt />
-
-                {/*<span>{t('admin')}</span>*/}
               </Link>
             </div>
 

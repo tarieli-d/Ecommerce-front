@@ -112,7 +112,7 @@ body {
 /*common css*/
 .select {
   text-align-last: center;
-  color: /*rgba(13, 120, 207)*/ white;
+  color: /*rgba(13, 120, 207)*/ rgb(255, 251, 251);
   border: 0.1rem rgb(196, 193, 193, 0.5) solid;
   outline: none;
   cursor: pointer;
@@ -121,6 +121,7 @@ body {
   margin: 0;
   padding: 0.3rem;
 }
+
 button {
   border-radius: 0.2rem;
   color: white;
@@ -185,14 +186,11 @@ a {
 .sidenav a:hover {
   color: white;
   background-image: none;
-  background-color: rgb(9, 133, 71);
-  background: rgb(12, 136, 185);
+  background-color: /*rgb(9, 133, 71)*/ rgb(12, 136, 185);
   opacity: 1;
 }
-
 .sidenav .closebtn {
   align-self: flex-end;
-  margin-bottom: 1rem;
   text-align: center;
   display: inline-block;
   font-weight: bold;
@@ -201,10 +199,16 @@ a {
   padding: 0;
   background: transparent !important;
 }
-
-.sidenav #closeIcon:hover {
+.sidenav .closebtn:hover {
   color: rgb(248, 8, 8);
 }
+.sidenav .langSwitch {
+  display: flex;
+  justify-content: center;
+  height: 8%;
+  width: 5rem;
+}
+
 /*whole header*/
 header {
   display: flex;
@@ -322,7 +326,7 @@ header {
   height: 100%;
   width: 90%;
   column-gap: 0.1rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: black;
   background: rgb(9, 64, 100);
@@ -471,12 +475,11 @@ header .menu a {
 /*products page content*/
 .main {
   flex: auto;
-  width: 98%;
-  padding: 2rem 0 5rem 0;
   display: flex;
   gap: 1rem;
   justify-content: center;
-  align-items: center;
+  width: 98%;
+  padding: 2rem 0 5rem 0;
   box-sizing: border-box;
   background-color: white;
   box-shadow: 0 2px 0.3rem 0.1rem rgb(199, 194, 187);
@@ -525,6 +528,10 @@ header .menu a {
 .sort .select {
   background: transparent;
 }
+.sort .select option {
+   color: black; 
+  }
+
 .categoried {
   flex: 0 0 22%;
   max-width: 22%;
@@ -742,9 +749,12 @@ footer {
 }
 @media (max-width: 760px) {
   .headerTop #searchBar {
-    width: 16rem;
+    width: 20rem;
   }
   .headerTop #admin {
+    display: none;
+  }
+  .headerTop .langSwitch {
     display: none;
   }
   .main {
@@ -776,7 +786,6 @@ footer {
   }
   .headerTop #searchBar {
     height: 30%;
-    width: 18rem;
   }
   .headerTop .langSwitch {
     height: 30%;
