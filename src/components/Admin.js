@@ -7,12 +7,15 @@ import {
 } from 'react-icons/fa';
 import Products from './Products';
 import MySelect from './MySelect';
+import { useTranslation } from 'react-i18next';
+
 
 const Admin = props => {
   const [imgUrl, setImgUrl] = useState('');
   const [price, setPrice] = useState('');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
+  const { t, i18n } = useTranslation();
 
   const handleChange = (...rest) => {
     if (['ყველა', 'კაცი', 'ქალი', 'ბავშვი'].includes(rest[0]) == true) {
@@ -31,7 +34,7 @@ const Admin = props => {
           props.addProduct([imgUrl, title, category, price]);
         }}
       >
-        <label>პროდუქტის დამატება</label>
+        <label>{t('add')}</label>
 
         <div className="addCategory">
           {<FaGripVertical />}

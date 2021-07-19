@@ -1,8 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MySelect from './MySelect';
 import Slideri from './Slider';
-import { useTranslation } from 'react-i18next';
 
 const Products = props => {
   const { t, i18n } = useTranslation();
@@ -160,7 +160,7 @@ const Products = props => {
                       placeholder={`${e.price} ლარი`}
                     />
                     <button onClick={() => priceChanged(e.title)}>
-                      შეცვლა
+                      {t('change')}
                     </button>
                   </span>
 
@@ -169,7 +169,7 @@ const Products = props => {
                       style={{ background: 'red' }}
                       onClick={() => removeItem(e.imgUrl, act)}
                     >
-                      {act}
+                      {t('del')}
                     </button>
                   ) : (
                     <button
@@ -179,7 +179,7 @@ const Products = props => {
                       }}
                     >
                       <ShoppingCartIcon />
-                      <b>{act}</b>
+                      <b>{t('cart')}</b>
                     </button>
                   )}
                 </div>

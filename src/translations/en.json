@@ -13,5 +13,9 @@
   "category": "Category",
   "sort": "Sort by",
   "filtrate": "Filtrate",
-  "range": "Choose appropriate range"
+  "range": "Choose appropriate range",
+  "cart": "Add to cart",
+  "del": "Delete",
+  "change": "Change",
+  "add": "Add product"
 }

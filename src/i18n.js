@@ -1,15 +1,22 @@
 import i18n from 'i18next';
 import Backend from 'i18next-xhr-backend';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import translationEn from './translations/en.json';
+import translationGe from './translations/ge.json';
 
 i18n
   .use(Backend)
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: 'ge',
-    backend: {
-      /* translation file path */
-      loadPath: '/assets/i18n/{{ns}}/{{lng}}.json'
+    resources: {
+      en: {
+        translations: translationEn
+      },
+      ge: {
+        translations: translationGe
+      }
     },
     fallbackLng: 'ge',
     debug: true,
@@ -22,7 +29,7 @@ i18n
       formatSeparator: ','
     },
     react: {
-      wait: true
+      react: { useSuspense: true }
     }
   });
 

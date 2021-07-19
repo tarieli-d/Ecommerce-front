@@ -509,6 +509,7 @@ header .menu a {
   flex: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
   row-gap: 1rem;
   width: 100%;
   margin-top: 8rem;
@@ -566,7 +567,7 @@ header .menu a {
 }
 
 .categoried {
-  flex: 0 0 22%;
+  flex: 0 0 20%;
   max-width: 20%;
   height: 18rem;
   align-self: flex-start;
@@ -707,10 +708,11 @@ img {
   font-weight: 700;
 }
 .admin {
-  margin-top: 1rem;
+  margin-top: 10rem;
 }
 .admin .main {
   flex: 0;
+  margin-top: 0;
   border-top: 2px #393a3a solid;
 }
 .admin .product {
@@ -733,6 +735,9 @@ img {
   text-decoration: none;
   width: 100%;
   height: 20%;
+}
+.admin .main .bottom button {
+  width: 6rem;
 }
 .admin .main .bottom span input {
   pointer-events: auto;

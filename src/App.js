@@ -1,3 +1,5 @@
+import './i18n';
+import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { FaSearch, FaBars, FaUserAlt } from 'react-icons/fa';
@@ -12,8 +14,6 @@ import Menu from './components/Menu.js';
 import SideNav from './components/Sidenav.js';
 import Admin from './components/Admin.js';
 import productsArray from './components/constants.js';
-import './i18n';
-import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
