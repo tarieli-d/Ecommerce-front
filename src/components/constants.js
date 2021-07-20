@@ -34,7 +34,6 @@ const productsArray = [
   {
     imgUrl:
       'https://rukminim1.flixcart.com/image/714/857/jn4x47k0/shoe/k/q/s/023-black-6-6-lee-cargo-black-original-imaf9trhyzejgwvd.jpeg?q=50',
-
     title: 'shoes',
     category: 'კაცი',
     price: 60,

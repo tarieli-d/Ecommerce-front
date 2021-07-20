@@ -9,16 +9,19 @@ import Products from './Products';
 import MySelect from './MySelect';
 import { useTranslation } from 'react-i18next';
 
-
 const Admin = props => {
   const [imgUrl, setImgUrl] = useState('');
   const [price, setPrice] = useState('');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleChange = (...rest) => {
-    if (['ყველა', 'კაცი', 'ქალი', 'ბავშვი'].includes(rest[0]) == true) {
+    if (rest[0] == 'All') rest[0] = 'ყველა';
+    if (rest[0] == 'Man') rest[0] = 'კაცი';
+    if (rest[0] == 'Woman') rest[0] = 'ქალი';
+    if (rest[0] == 'Child') rest[0] = 'ბავშვი';
+    if (['ყველა', 'კაცი', 'ქალი', 'ბავშვი'].includes(rest[0])) {
       setCategory(rest[0]);
       return;
     }
@@ -26,6 +29,7 @@ const Admin = props => {
     else if (rest[0] == 'title') setTitle(rest[1]);
     else if (rest[0] == 'price') setPrice(rest[1]);
   };
+
   return (
     <div className="common admin">
       <form
@@ -38,10 +42,10 @@ const Admin = props => {
 
         <div className="addCategory">
           {<FaGripVertical />}
-          <span>კატეგორია:</span>{' '}
+          <span>{t('category')}:</span>{' '}
           <MySelect
             onClick={handleChange}
-            options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
+            options={[t('all'), t('man'), t('woman'), t('child')]}
           />
         </div>
         <div>
@@ -52,7 +56,7 @@ const Admin = props => {
               handleChange(e.currentTarget.className, e.currentTarget.value)
             }
             value={imgUrl}
-            placeholder="Image url"
+            placeholder={t('imgUrl')}
           />
         </div>
         <div>
@@ -63,7 +67,7 @@ const Admin = props => {
               handleChange(e.currentTarget.className, e.currentTarget.value)
             }
             value={title}
-            placeholder="Title"
+            placeholder={t('title')}
           />
         </div>
         <div>
@@ -74,12 +78,12 @@ const Admin = props => {
               handleChange(e.currentTarget.className, e.currentTarget.value)
             }
             value={price}
-            placeholder="Price"
+            placeholder={t('price')}
           />
         </div>
-        <button>დამატება</button>
+        <button>{t('add')}</button>
       </form>
-      <div id="adminDelText">პროდუქტის წაშლა ან ფასის შეცვლა</div>
+      <div id="adminDelText">{t('remove_changeLable')}</div>
       <Products arr={[...props.arr]} />
     </div>
   );

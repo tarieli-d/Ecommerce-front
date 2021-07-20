@@ -52,12 +52,11 @@ function AirbnbThumbComponent(props) {
 }
 
 const Slideri = props => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   // Our States
   const [Value, setValue] = useState([0, 99]);
   // Changing State when volume increases/decreases
   const rangeSelector = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
     props.rangeSelector(newValue);
   };

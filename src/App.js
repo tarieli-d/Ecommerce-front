@@ -140,7 +140,7 @@ const App = () => {
                 <input
                   onChange={e => handleSearch(e)}
                   value={searchValue}
-                  placeholder="Search product.."
+                  placeholder={t('search')}
                 />
                 <FaSearch className="searchIcon" />
               </span>

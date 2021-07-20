@@ -2,8 +2,8 @@ import i18n from 'i18next';
 import Backend from 'i18next-xhr-backend';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import translationEn from './translations/en.json';
-import translationGe from './translations/ge.json';
+import { en } from './translations/en.js';
+import { ge } from './translations/ge.js';
 
 i18n
   .use(Backend)
@@ -12,10 +12,10 @@ i18n
   .init({
     resources: {
       en: {
-        translations: translationEn
+        translations: en
       },
       ge: {
-        translations: translationGe
+        translations: ge
       }
     },
     fallbackLng: 'ge',

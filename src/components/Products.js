@@ -1,15 +1,16 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MySelect from './MySelect';
 import Slideri from './Slider';
 
 const Products = props => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
-  const [sortValue, setSortValue] = useState('');
+  const [sortValue, setSortValue] = useState('ფასით - დაბლიდან მაღლა');
   const [chosenCategory, setChosenCategory] = useState('');
+  const [sliderValue, setSliderValue] = useState([0, 99]);
   /**Destructuring props */
   const [
     filteredData,
@@ -22,19 +23,17 @@ const Products = props => {
   ] = [...props.arr];
 
   const rangeSelector = newValue => {
-    let sortedObj = [];
-    sortedObj = Sort(sortValue);
-    sortedObj = sortedObj.filter(
-      data => data.price >= newValue[0] && data.price <= newValue[1]
-    );
-    setFilteredData(sortedObj);
+    Sort(newValue);
   };
 
-  /**when products array is modified in some form:deleted,changed price or added product to,filteredData array should be amended accordingly by invoking Sort function.filteredData array alike products array is displayed on products page,products array is not,it just keeps products info and gives them to filteredData when they need to be displayed */
+  /**when products array is modified in some form:deleted,changed price or added product to,filteredData array should be amended accordingly by invoking Sort function.filteredData array alike products array is displayed on products page,it just keeps all products info and gives them to filteredData when they need to be displayed */
+  const firstUpdate = useRef(true);
   useEffect(() => {
-    const newObject = [...products];
-    let sortedObj = () => Sort(sortValue);
-    setFilteredData(sortedObj);
+    /*if (firstUpdate.current) {
+      firstUpdate.current = 'false';
+      return;
+    }*/
+    Sort(sortValue);
   }, [products]);
 
   /**when product delete button is clicked in admin panel invoke this func */
@@ -56,29 +55,8 @@ const Products = props => {
     setProduct(newObject);
   };
 
-  /*dalageba tarigit,fasit(zrdadobit an klebadobit) searchValue da sortValue gatvaliswinebit */
-  const Sort = value => {
-    let arr;
-    if (value.length > 10) {
-      setSortValue(value);
-      arr = [...products].filter(
-        data =>
-          data.title.includes(searchValue) &&
-          data.category.includes(chosenCategory)
-      );
-    } else {
-      arr = [...products].filter(data => data.title.includes(searchValue));
-      if (value == 'ყველა') {
-        setChosenCategory('');
-        arr = arr.filter(prod => prod);
-      } else if (value == 'ბავშვი' || value == 'ქალი' || value == 'კაცი') {
-        setChosenCategory(value);
-        arr = arr.filter(prod => prod.category == value);
-        value = sortValue;
-      }
-    }
-    /**set which sort option is picked,when useEffect spots changes in products array it calls this function with sortValue,to sort products array and save sorted data to filteredData array with respect to sortValue and searchValue*/
-
+  const SortBy = (...rest) => {
+    const [arr, value] = [...rest];
     if (value == 'ფასით - დაბლიდან მაღლა')
       arr.sort((a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0));
     else if (value == 'ფასით - მაღლიდან დაბლა')
@@ -101,10 +79,60 @@ const Products = props => {
           ? -1
           : 0
       );
-
-    setFilteredData(arr);
-    /**return sorted products to useEffect,in order to save them to filteredData array */
     return arr;
+  };
+
+  /*gapiltrva sortValue(tarigit,fasit(zrdadobit an klebadobit) searchValue da chosenCategory gatvaliswinebit */
+  const Sort = value => {
+    let arr = [...products].filter(data => data.title.includes(searchValue));
+
+    if (value == 'Man') value = 'კაცი';
+    if (value == 'Woman') value = 'ქალი';
+    if (value == 'Child') value = 'ბავშვი';
+    if (value == 'Price - from low to high') value = 'ფასით - დაბლიდან მაღლა';
+    if (value == 'Price - from high to low') value = 'ფასით - მაღლიდან დაბლა';
+    if (value == 'By name A-H') value = 'დასახელების მიხედვით ა-ჰ';
+    if (value == 'By date - from old to new')
+      value = 'თარიღით - ძველიდან ახლისკენ';
+    if (value == 'By Date - From new to old')
+      value = 'თარიღით - ახლიდან ძველისკენ';
+    if (Array.isArray(value)) {
+      setSliderValue(value);
+      arr = SortBy(arr, sortValue);
+      arr = arr.filter(
+        data =>
+          data.price >= value[0] &&
+          data.price <= value[1] &&
+          data.category.includes(chosenCategory)
+      );
+    } else if (value.length > 10) {
+      /**set which sort option is chosen,when useEffect spots changes in products array it calls this function with sortValue,to sort products array and save sorted data to filteredData array with respect to chosenCategory and searchValue*/
+      setSortValue(value);
+      arr = arr.filter(
+        data =>
+          data.category.includes(chosenCategory) &&
+          data.price >= sliderValue[0] &&
+          data.price <= sliderValue[1]
+      );
+      arr = SortBy(arr, value);
+    } else {
+      arr = SortBy(arr, sortValue);
+      if (value == 'ყველა' || value == 'All') {
+        setChosenCategory('');
+        arr = arr.filter(
+          data => data.price >= sliderValue[0] && data.price <= sliderValue[1]
+        );
+      } else if (value == 'ბავშვი' || value == 'ქალი' || value == 'კაცი') {
+        setChosenCategory(value);
+        arr = arr.filter(
+          data =>
+            data.category == value &&
+            data.price >= sliderValue[0] &&
+            data.price <= sliderValue[1]
+        );
+      }
+    }
+    setFilteredData(arr);
   };
 
   return (
@@ -114,7 +142,7 @@ const Products = props => {
           <span>{t('category')}</span>{' '}
           <MySelect
             onClick={Sort}
-            options={['ყველა', 'კაცი', 'ქალი', 'ბავშვი']}
+            options={[t('all'), t('man'), t('woman'), t('child')]}
           />
           <div className="slider">
             <Slideri rangeSelector={rangeSelector} />
@@ -126,11 +154,11 @@ const Products = props => {
             <MySelect
               onClick={Sort}
               options={[
-                'ფასით - დაბლიდან მაღლა',
-                'ფასით - მაღლიდან დაბლა',
-                'დასახელების მიხედვით ა-ჰ',
-                'თარიღით - ძველიდან ახლისკენ',
-                'თარიღით - ახლიდან ძველისკენ'
+                t('price_from_low_to_high'),
+                t('price_from_high_to_low'),
+                t('by_name'),
+                t('by_date_old_to_new'),
+                t('by_date_new_to_old')
               ]}
             />
           </div>
