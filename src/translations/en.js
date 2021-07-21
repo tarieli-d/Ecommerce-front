@@ -22,6 +22,7 @@ export const en = {
   add: 'Add product',
   remove_changeLable: 'Change price of product or delete it',
   search: 'Search product..',
+  nothing_found: 'Nothing Found',
   price: 'Price',
   title: 'Title',
   imgUrl: 'Image url',
@@ -33,5 +34,8 @@ export const en = {
   price_from_high_to_low: 'Price - from high to low',
   by_name: 'By name A-H',
   by_date_old_to_new: 'By date - from old to new',
-  by_date_new_to_old: 'By Date - From new to old'
+  by_date_new_to_old: 'By Date - From new to old',
+  total_price: 'Total:',
+  order: 'Make order',
+  lari: 'Lari'
 };

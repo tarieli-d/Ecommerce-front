@@ -25,7 +25,8 @@ const App = () => {
   const [filteredData, setFilteredData] = useState(products);
   const [searchResultDisplay, setSearchResultDisplay] = useState('none');
   const [searchValue, setSearchValue] = useState('');
-  const { t, i18n } = useTranslation();
+  const [searchResult, setSearchResult] = useState([]);
+  const { t } = useTranslation();
   const [popupWindowShow, setPopupWindowShow] = useState('none');
   const [cartData, setCartData] = useState(new Set());
   const itemCount = [...cartData].length;
@@ -83,13 +84,15 @@ const App = () => {
     if (value == '' || typeof e.currentTarget != 'object')
       setSearchResultDisplay('none');
     else setSearchResultDisplay('flex');
-    /*replace + (temporarily here and below while searching) with `,coz + breaks search,note that it is not replaced in products or filteredData array,just here for the sake of search funcyion below*/
+    /*replace + (temporarily here and below while searching) with `,coz + breaks search,note that it is not replaced in products or filteredData array,just here for the sake of search function below*/
     value = value.replace(/\+/g, '`');
     result = products.filter(data => {
       return data.title.replace(/\+/g, '`').search(value) != -1;
     });
-
     setFilteredData(result);
+    result=[...result].sort(a => (a.title < value ? 1 : a.title > value ? -1 : 0));
+    if (result.length == 0) setSearchResult([{ title: t('nothing_found') }]);
+    else setSearchResult(result);
   };
 
   return (
@@ -105,8 +108,12 @@ const App = () => {
       />
       <div className="popupWindow" style={Style}>
         <div onClick={popupWindow} className="close">
-          <span>Total:{cartTotal}Lari</span>
-          <Link to="contact">Make order</Link>
+          <span>
+            {t('total_price')}
+            {cartTotal}
+            {t('lari')}
+          </span>
+          <Link to="contact">{t('order')}</Link>
           <span>&times;</span>
         </div>
         {[...cartData].map((e, i) => {
@@ -114,7 +121,8 @@ const App = () => {
             <div className="cartItem" key={i}>
               <img src={e.imgUrl} />
               <span>
-                {e.title}({e.price}Lari)
+                {e.title}({e.price}
+                {t('lari')})
               </span>
               <span className="del" onClick={() => removeFromCart(e)}>
                 &times;
@@ -148,17 +156,18 @@ const App = () => {
                 style={{ display: searchResultDisplay }}
                 className="searchResult"
               >
-                {filteredData.map((value, index) => {
-                  return (
-                    <Link
-                      key={index}
-                      to="/products"
-                      value={searchValue}
-                      onClick={() => handleSearch(value.title)}
-                    >
-                      {value.title}
-                    </Link>
-                  );
+                {searchResult.map((value, index) => {
+                  while (index < 6)
+                    return (
+                      <Link
+                        key={index}
+                        to="/products"
+                        value={searchValue}
+                        onClick={() => handleSearch(value.title)}
+                      >
+                        {value.title}
+                      </Link>
+                    );
                 })}
               </div>
             </div>

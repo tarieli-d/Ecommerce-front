@@ -58,7 +58,7 @@ const Slideri = props => {
   // Changing State when volume increases/decreases
   const rangeSelector = (event, newValue) => {
     setValue(newValue);
-    props.rangeSelector(newValue);
+    props.Sort(newValue);
   };
 
   return (

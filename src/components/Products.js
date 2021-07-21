@@ -8,9 +8,10 @@ const Products = props => {
   const { t } = useTranslation();
   const [newPrice, setNewPrice] = useState('');
   const [activeInput, setActiveInput] = useState('');
-  const [sortValue, setSortValue] = useState('ფასით - დაბლიდან მაღლა');
+  const [sortValue, setSortValue] = useState('თარიღით - ახლიდან ძველისკენ');
   const [chosenCategory, setChosenCategory] = useState('');
   const [sliderValue, setSliderValue] = useState([0, 99]);
+  console.log(sortValue)
   /**Destructuring props */
   const [
     filteredData,
@@ -22,22 +23,18 @@ const Products = props => {
     addToCart
   ] = [...props.arr];
 
-  const rangeSelector = newValue => {
-    Sort(newValue);
-  };
-
   /**when products array is modified in some form:deleted,changed price or added product to,filteredData array should be amended accordingly by invoking Sort function.filteredData array alike products array is displayed on products page,it just keeps all products info and gives them to filteredData when they need to be displayed */
   const firstUpdate = useRef(true);
   useEffect(() => {
     /*if (firstUpdate.current) {
       firstUpdate.current = 'false';
       return;
-    }*/
+    }*/console.log('6')
     Sort(sortValue);
   }, [products]);
 
   /**when product delete button is clicked in admin panel invoke this func */
-  const removeItem = (imgUrl, action) => {
+  const removeItem = (imgUrl) => {
     const newObject = products.filter(prod => prod.imgUrl != imgUrl);
     setProduct(newObject);
   };
@@ -145,7 +142,7 @@ const Products = props => {
             options={[t('all'), t('man'), t('woman'), t('child')]}
           />
           <div className="slider">
-            <Slideri rangeSelector={rangeSelector} />
+            <Slideri Sort={Sort} />
           </div>
         </div>
         <div className="products">
@@ -154,11 +151,11 @@ const Products = props => {
             <MySelect
               onClick={Sort}
               options={[
+                t('by_date_new_to_old'),
+                t('by_date_old_to_new'),
                 t('price_from_low_to_high'),
                 t('price_from_high_to_low'),
-                t('by_name'),
-                t('by_date_old_to_new'),
-                t('by_date_new_to_old')
+                t('by_name')    
               ]}
             />
           </div>
@@ -185,7 +182,7 @@ const Products = props => {
                         setActiveInput(e.currentTarget.className);
                       }}
                       value={activeInput == e.imgUrl ? newPrice : ''}
-                      placeholder={`${e.price} ლარი`}
+                      placeholder={e.price + t('lari')}
                     />
                     <button onClick={() => priceChanged(e.title)}>
                       {t('change')}
@@ -195,7 +192,7 @@ const Products = props => {
                   {act == 'წაშლა' ? (
                     <button
                       style={{ background: 'red' }}
-                      onClick={() => removeItem(e.imgUrl, act)}
+                      onClick={() => removeItem(e.imgUrl)}
                     >
                       {t('del')}
                     </button>
