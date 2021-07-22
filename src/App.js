@@ -23,17 +23,33 @@ const App = () => {
   const [sidenavWidth, setSidenavWidth] = useState('0px');
   const [products, setProduct] = useState(productsArray);
   const [filteredData, setFilteredData] = useState(products);
-  const [searchResultDisplay, setSearchResultDisplay] = useState('none');
+  //const [searchResultDisplay, setSearchResultDisplay] = useState('flex');
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const { t } = useTranslation();
   const [popupWindowShow, setPopupWindowShow] = useState('none');
   const [cartData, setCartData] = useState(new Set());
+  const [quantity, setQuantity] = useState([]);
   const itemCount = [...cartData].length;
-  const cartTotal = [...cartData].reduce(
+  const [cartTotal,setCartTotal]=useState(0) /*= [...cartData].reduce(
     (total, { price = 0 }) => total + price,
     0
-  );
+  )*/;
+  const firstUpdate = useRef(true);
+  useEffect(() => {
+    if (firstUpdate.current) {
+      let arr = [];
+      products.map((e, i) => {
+        arr[i] = 0;
+      });
+      setQuantity(arr);
+      firstUpdate.current = 'false';
+      return;
+    }
+   
+  }, []);
+
   const Style = {
     display: popupWindowShow
   };
@@ -78,19 +94,25 @@ const App = () => {
     else {
       value = e.toLowerCase();
     }
+    setSearchInput(value);
+    if (value == '') {
+      setSearchResult([]);
+      setSearchValue('');
+      return;
+    }
 
-    setSearchValue(value);
-
-    if (value == '' || typeof e.currentTarget != 'object')
+    /*if (value == '' || typeof e.currentTarget != 'object')
       setSearchResultDisplay('none');
     else setSearchResultDisplay('flex');
     /*replace + (temporarily here and below while searching) with `,coz + breaks search,note that it is not replaced in products or filteredData array,just here for the sake of search function below*/
     value = value.replace(/\+/g, '`');
-    result = products.filter(data => {
+    result = [...filteredData].filter(data => {
       return data.title.replace(/\+/g, '`').search(value) != -1;
     });
-    setFilteredData(result);
-    result=[...result].sort(a => (a.title < value ? 1 : a.title > value ? -1 : 0));
+    // setFilteredData(result);
+    result = [...result].sort(a =>
+      a.title < value ? 1 : a.title > value ? -1 : 0
+    );
     if (result.length == 0) setSearchResult([{ title: t('nothing_found') }]);
     else setSearchResult(result);
   };
@@ -124,6 +146,29 @@ const App = () => {
                 {e.title}({e.price}
                 {t('lari')})
               </span>
+              <span className="quantity">
+                <span
+                  onClick={() => {
+                    let q = [...quantity];
+                    q[i] += 1;
+                    setQuantity(q);
+                    setCartTotal(prev=>prev+e.price)
+                  }}
+                >
+                  +
+                </span>
+                <span>{quantity[i]}</span>
+                <span
+                  onClick={() => {
+                    let q = [...quantity];
+                    q[i] > 0 ? (q[i] -= 1) : (q[i] = 0);
+                    setQuantity(q);
+                    setCartTotal(prev=>(0,prev-e.price))
+                  }}
+                >
+                  -
+                </span>
+              </span>
               <span className="del" onClick={() => removeFromCart(e)}>
                 &times;
               </span>
@@ -147,27 +192,45 @@ const App = () => {
               <span>
                 <input
                   onChange={e => handleSearch(e)}
-                  value={searchValue}
+                  value={searchInput}
                   placeholder={t('search')}
                 />
-                <FaSearch className="searchIcon" />
+                <FaSearch
+                  className="searchIcon"
+                  onClick={() => {
+                    setSearchValue(searchInput), setSearchResult([]);
+                  }}
+                />
               </span>
               <div
-                style={{ display: searchResultDisplay }}
+                //style={{ display: searchResultDisplay }}
                 className="searchResult"
               >
                 {searchResult.map((value, index) => {
                   while (index < 6)
-                    return (
-                      <Link
-                        key={index}
-                        to="/products"
-                        value={searchValue}
-                        onClick={() => handleSearch(value.title)}
-                      >
-                        {value.title}
-                      </Link>
-                    );
+                    if (
+                      value.title == 'Nothing found' ||
+                      value.title != 'არ მოიძებნა'
+                    )
+                      return (
+                        <Link
+                          key={index}
+                          to="/products"
+                          onClick={() => {
+                            setSearchValue(value.title),
+                              setSearchInput(value.title),
+                              setSearchResult([]);
+                          }}
+                        >
+                          {value.title}
+                        </Link>
+                      );
+                    else
+                      return (
+                        <Link to="/products" key={index}>
+                          {value.title}
+                        </Link>
+                      );
                 })}
               </div>
             </div>

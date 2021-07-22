@@ -11,7 +11,7 @@ const Products = props => {
   const [sortValue, setSortValue] = useState('თარიღით - ახლიდან ძველისკენ');
   const [chosenCategory, setChosenCategory] = useState('');
   const [sliderValue, setSliderValue] = useState([0, 99]);
-  console.log(sortValue)
+
   /**Destructuring props */
   const [
     filteredData,
@@ -29,12 +29,12 @@ const Products = props => {
     /*if (firstUpdate.current) {
       firstUpdate.current = 'false';
       return;
-    }*/console.log('6')
+    }*/
     Sort(sortValue);
-  }, [products]);
+  }, [products, searchValue]);
 
   /**when product delete button is clicked in admin panel invoke this func */
-  const removeItem = (imgUrl) => {
+  const removeItem = imgUrl => {
     const newObject = products.filter(prod => prod.imgUrl != imgUrl);
     setProduct(newObject);
   };
@@ -155,7 +155,7 @@ const Products = props => {
                 t('by_date_old_to_new'),
                 t('price_from_low_to_high'),
                 t('price_from_high_to_low'),
-                t('by_name')    
+                t('by_name')
               ]}
             />
           </div>
