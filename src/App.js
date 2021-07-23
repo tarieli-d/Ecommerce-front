@@ -6,6 +6,7 @@ import { FaSearch, FaBars, FaUserAlt } from 'react-icons/fa';
 import { Wave } from 'react-animated-text';
 import './style.css';
 import Products from './components/Products';
+import Details from './components/Details';
 import Contact from './components/Contact.js';
 import Delivery from './components/Delivery.js';
 import About from './components/About.js';
@@ -21,8 +22,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 const App = () => {
   const [activeMenuOption, setActiveMenuOption] = useState(-1);
   const [sidenavWidth, setSidenavWidth] = useState('0px');
-  const [products, setProduct] = useState(productsArray);
-  const [filteredData, setFilteredData] = useState(products);
+  const [products, setProduct] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   //const [searchResultDisplay, setSearchResultDisplay] = useState('flex');
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
@@ -32,27 +33,27 @@ const App = () => {
   const [cartData, setCartData] = useState(new Set());
   const [quantity, setQuantity] = useState([]);
   const itemCount = [...cartData].length;
-  const [cartTotal,setCartTotal]=useState(0) /*= [...cartData].reduce(
-    (total, { price = 0 }) => total + price,
-    0
-  )*/;
-  const firstUpdate = useRef(true);
+  const [cartTotal, setCartTotal] = useState(0);
   useEffect(() => {
-    if (firstUpdate.current) {
-      let arr = [];
-      products.map((e, i) => {
-        arr[i] = 0;
-      });
-      setQuantity(arr);
-      firstUpdate.current = 'false';
-      return;
-    }
-   
+    let temp = [];
+    //copy without reference
+    productsArray.forEach((item, i) => {
+      temp[i] = { ...item };
+    });
+    setProduct(temp);
+    setFilteredData(temp);
+    //initialize quantity array with zeros,soon we will replace zeros with the quantity for each product user added to cart
+    let arr = [];
+    temp.map((e, i) => {
+      arr[i] = 0;
+    });
+    setQuantity(arr);
   }, []);
 
   const Style = {
     display: popupWindowShow
   };
+  /**shopping cart */
   const popupWindow = e => {
     if (e.currentTarget.className == 'close') setPopupWindowShow('none');
     else setPopupWindowShow('flex');
@@ -60,7 +61,15 @@ const App = () => {
   const addToCart = e => {
     setCartData(prev => new Set(prev).add(e));
   };
-  const removeFromCart = item => {
+  const removeFromCart = (item, index) => {
+    let q = [...quantity];
+    setCartTotal(prev => {
+      let t = prev - q[index] * item.price;
+      q.splice(index, 1);
+      q.push(0);
+      return t;
+    });
+    setQuantity(q);
     setCartData(prev => {
       let newCart = new Set(prev);
       newCart.delete(item);
@@ -70,6 +79,7 @@ const App = () => {
   /**addProduct is invoked when new product is added in admin component */
   const addProduct = arg => {
     let product = {
+      id: products.length,
       imgUrl: arg[0],
       title: arg[1],
       category: arg[2],
@@ -150,9 +160,11 @@ const App = () => {
                 <span
                   onClick={() => {
                     let q = [...quantity];
-                    q[i] += 1;
-                    setQuantity(q);
-                    setCartTotal(prev=>prev+e.price)
+                    if (q[i] < e.count) {
+                      q[i] += 1;
+                      setQuantity(q);
+                      setCartTotal(prev => prev + e.price);
+                    }
                   }}
                 >
                   +
@@ -161,15 +173,27 @@ const App = () => {
                 <span
                   onClick={() => {
                     let q = [...quantity];
-                    q[i] > 0 ? (q[i] -= 1) : (q[i] = 0);
-                    setQuantity(q);
-                    setCartTotal(prev=>(0,prev-e.price))
+                    if (q[i] > 0) {
+                      q[i] -= 1;
+                      setQuantity(q);
+                      setCartTotal(prev => prev - e.price);
+                    }
                   }}
                 >
                   -
                 </span>
               </span>
-              <span className="del" onClick={() => removeFromCart(e)}>
+              <span
+                className="del"
+                onClick={() => {
+                  removeFromCart(e, i);
+                  let prod = [...filteredData];
+                  prod.forEach(item => {
+                    item.id == e.id ? (item.inCart = false) : item.inCart;
+                  });
+                  setFilteredData(prod);
+                }}
+              >
                 &times;
               </span>
             </div>
@@ -184,7 +208,7 @@ const App = () => {
             <div id="menuIcon">
               <FaBars onClick={openCloseNav} />
               <span>
-                <Wave speed={4} text="Wellcome" effect="fadeOut" />
+                <Wave speed={4} text="        " effect="fadeOut" />
               </span>
             </div>
 
@@ -291,6 +315,7 @@ const App = () => {
               ]}
             />
           </Route>
+          <Route path="/details/:id" component={Details} />
           <Route path="/delivery">
             <Delivery />
           </Route>

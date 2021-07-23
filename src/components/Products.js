@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MySelect from './MySelect';
@@ -11,6 +12,7 @@ const Products = props => {
   const [sortValue, setSortValue] = useState('თარიღით - ახლიდან ძველისკენ');
   const [chosenCategory, setChosenCategory] = useState('');
   const [sliderValue, setSliderValue] = useState([0, 99]);
+  const [selectedProduct, setSelectedProduct] = useState();
 
   /**Destructuring props */
   const [
@@ -160,16 +162,18 @@ const Products = props => {
             />
           </div>
 
-          {filteredData.map((e, i) => {
+          {filteredData.map(e => {
             return (
               <div
                 className={
                   act != 'წაშლა' ? 'product notAnimated' : 'product notAnimated'
                 }
-                key={i}
+                key={e.id}
               >
                 <div className="top">
-                  <img src={e.imgUrl} />
+                  <Link to={`/details/${e.id}`}>
+                    <img src={e.imgUrl} />
+                  </Link>
                 </div>
                 <div className="bottom">
                   <span>{e.title}</span>
@@ -201,10 +205,15 @@ const Products = props => {
                       style={{ background: 'green' }}
                       onClick={() => {
                         addToCart(e);
+                        let prod = [...filteredData];
+                        prod.forEach(item => {
+                          item.id == e.id ? (item.inCart = true) : item.inCart;
+                        });
+                        setFilteredData(prod);
                       }}
                     >
                       <ShoppingCartIcon />
-                      <b>{t('cart')}</b>
+                      <b>{e.inCart ? 'In cart' : t('cart')}</b>
                     </button>
                   )}
                 </div>

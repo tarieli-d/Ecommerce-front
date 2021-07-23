@@ -149,15 +149,7 @@ body {
   ;
   cursor: pointer;
 }
-.popupWindow .cartItem .quantity:nth-child(1){
-  
-}
-.popupWindow .cartItem .quantity:nth-child(1){
-  
-}
-.popupWindow .cartItem .quantity:nth-child(1){
-  
-}
+
 .popupWindow .cartItem img {
   height: 100%;
   width: 5rem;
@@ -567,6 +559,9 @@ header .menu a {
   background: white;
   pointer-events: none;
 }
+.product:hover {
+  box-shadow: 0 0 0.3rem 0.1rem rgb(121, 118, 115);
+}
 .sort {
   grid-column: 1 / -1;
   width: 100%;
@@ -673,10 +668,18 @@ header .menu a {
   height: 58%;
   border-bottom: 1px rgb(190, 189, 189) solid;
 }
-
-img {
+.top a{
   width: 100%;
   height: 100%;
+}
+.top img {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.top img:hover {
+  
 }
 .bottom {
   height: 42%;

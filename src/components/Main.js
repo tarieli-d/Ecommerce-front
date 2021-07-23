@@ -1,9 +1,11 @@
 import React from 'react';
+import { Wave } from 'react-animated-text';
 
 const Main = () => {
   return (
-    <div className="common">
-      <img src="https://www.coronainsights.com/wp-content/uploads/2014/11/Welcome.jpg" />
+    <div className="common" style={{fontSize:'6rem'}}>
+      
+      <Wave  speed={4} text="Wellcome" effect="fadeOut" />
     </div>
   );
 };
