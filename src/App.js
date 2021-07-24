@@ -84,6 +84,10 @@ const App = () => {
       title: arg[1],
       category: arg[2],
       price: arg[3],
+      oldPrice: '',
+      count: arg[4],
+      info: arg[5],
+      inCart: false,
       date: new Date().toString()
     };
     setProduct([...products, product]);
@@ -207,9 +211,10 @@ const App = () => {
           <div className="headerTop">
             <div id="menuIcon">
               <FaBars onClick={openCloseNav} />
-              <span>
-                <Wave speed={4} text="        " effect="fadeOut" />
-              </span>
+              <img
+                style={{ width: '170px', opacity: '.8' }}
+                src="https://i.ibb.co/c12pW6H/logo.jpg"
+              />
             </div>
 
             <div id="searchBar">
@@ -315,7 +320,12 @@ const App = () => {
               ]}
             />
           </Route>
-          <Route path="/details/:id" component={Details} />
+          <Route
+            path="/details/:id"
+            /*component={Details}*/ render={props => (
+              <Details arr={filteredData} {...props} />
+            )}
+          />
           <Route path="/delivery">
             <Delivery />
           </Route>

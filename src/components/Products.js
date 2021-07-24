@@ -41,13 +41,18 @@ const Products = props => {
     setProduct(newObject);
   };
   /**when price change button is clicked in admin panel invoke this func */
-  const priceChanged = title => {
+  const priceChanged = e => {
     const newObject = products.filter(prod => prod.imgUrl != activeInput);
     const obj = {
+      id: e.id,
       imgUrl: activeInput,
       price: newPrice,
-      title: title,
+      oldPrice: e.price,
+      title: e.title,
+      info: e.info,
+      count: e.count,
       category: chosenCategory,
+      inCart: e.inCart,
       date: new Date().toString()
     };
     newObject.unshift(obj);
@@ -162,7 +167,7 @@ const Products = props => {
             />
           </div>
 
-          {filteredData.map(e => {
+          {filteredData.map((e, i) => {
             return (
               <div
                 className={
@@ -178,6 +183,7 @@ const Products = props => {
                 <div className="bottom">
                   <span>{e.title}</span>
                   <span>
+                    <i>{e.oldPrice == '' ? '' : `${e.oldPrice}ლარი`}</i>
                     <input
                       className={e.imgUrl}
                       title={e.title}
@@ -188,7 +194,7 @@ const Products = props => {
                       value={activeInput == e.imgUrl ? newPrice : ''}
                       placeholder={e.price + t('lari')}
                     />
-                    <button onClick={() => priceChanged(e.title)}>
+                    <button onClick={() => priceChanged(e)}>
                       {t('change')}
                     </button>
                   </span>

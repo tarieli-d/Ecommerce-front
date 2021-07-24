@@ -14,6 +14,8 @@ const Admin = props => {
   const [price, setPrice] = useState('');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
+  const [count, setCount] = useState('');
+  const [info, setInfo] = useState('');
   const { t } = useTranslation();
 
   const handleChange = (...rest) => {
@@ -28,6 +30,8 @@ const Admin = props => {
     if (rest[0] == 'url') setImgUrl(rest[1]);
     else if (rest[0] == 'title') setTitle(rest[1]);
     else if (rest[0] == 'price') setPrice(rest[1]);
+    else if (rest[0] == 'count') setCount(rest[1]);
+    else if (rest[0] == 'info') setInfo(rest[1]);
   };
 
   return (
@@ -35,7 +39,7 @@ const Admin = props => {
       <form
         onSubmit={e => {
           e.preventDefault();
-          props.addProduct([imgUrl, title, category, price]);
+          props.addProduct([imgUrl, title, category, price, count, info]);
         }}
       >
         <label>{t('add')}</label>
@@ -74,10 +78,34 @@ const Admin = props => {
           {<FaMoneyBillAlt />}
           <input
             className="price"
+            type="number"
             onChange={e =>
               handleChange(e.currentTarget.className, e.currentTarget.value)
             }
             value={price}
+            placeholder={t('price')}
+          />
+        </div>
+        <div>
+          {<FaMoneyBillAlt />}
+          <input
+            className="count"
+            type="number"
+            onChange={e =>
+              handleChange(e.currentTarget.className, e.currentTarget.value)
+            }
+            value={count}
+            placeholder={t('price')}
+          />
+        </div>
+        <div className="textarea">
+          {<FaMoneyBillAlt />}
+          <textarea
+            className="info"
+            onChange={e =>
+              handleChange(e.currentTarget.className, e.currentTarget.value)
+            }
+            value={info}
             placeholder={t('price')}
           />
         </div>

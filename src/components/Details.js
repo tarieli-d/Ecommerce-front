@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
-import constants from './constants';
 
 const Details = props => {
-  const id = props.match.params.id - 1;
-
+  const id = props.match.params.id;
+  const filteredData = props.arr.filter(prod => prod.id == id);
   const prntStyle = {
     columnGap: '5rem'
   };
@@ -26,21 +25,27 @@ const Details = props => {
   };
   return (
     <div style={prntStyle} className="main">
-      <img style={imgStyle} src={constants[id].imgUrl} />
-      <div style={divStyle}>
-        <span>
-          <b>Title:</b>
-          {constants[id].title}
-        </span>
-        <span>
-          <b>Price:</b>
-          {constants[id].price}Lari
-        </span>
-        <span>
-          <b>About product:</b>
-          {constants[id].info}
-        </span>
-      </div>
+      {filteredData.map((e, i) => {
+        return (
+          <>
+            <img style={imgStyle} src={e.imgUrl} />
+            <div style={divStyle}>
+              <span>
+                <b>Title:</b>
+                {e.title}
+              </span>
+              <span>
+                <b>Price:</b>
+                {e.price}Lari
+              </span>
+              <span>
+                <b>About product:</b>
+                {e.info}
+              </span>
+            </div>
+          </>
+        );
+      })}
     </div>
   );
 };

@@ -135,18 +135,17 @@ body {
   cursor: pointer;
   pointer-events: auto;
 }
-.popupWindow .cartItem .quantity{
+.popupWindow .cartItem .quantity {
   display: inline-flex;
   justify-content: space-between;
   width: 5rem;
 }
-.popupWindow .cartItem .quantity span{
+.popupWindow .cartItem .quantity span {
   pointer-events: auto;
   display: inline-block;
-  border:1px solid black;
-  width:1.5rem;
-  text-align: center
-  ;
+  border: 1px solid black;
+  width: 1.5rem;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -205,7 +204,7 @@ a {
   display: flex;
   flex-direction: column;
   row-gap: 0.6rem;
-  height: 88%;
+  height: 12rem;
   width: 100%;
   top: 0;
   left: 0;
@@ -223,7 +222,7 @@ a {
   background-image: url('https://image.ibb.co/g5sxUk/pobrane.png');
   padding-left: 32px;
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 4vh;
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(231, 231, 223, 1);
   transition: 0.4s;
@@ -252,7 +251,10 @@ a {
   display: flex;
   justify-content: center;
   height: 8%;
-  width: 5rem;
+  width: 20vh;
+}
+.sidenav .langSwitch .select {
+  font: 4vh Verdana, sans-serif !important;
 }
 
 /*whole header*/
@@ -286,20 +288,21 @@ header {
   column-gap: 0.5rem;
   color: rgb(20, 140, 170);
   background-color: transparent;
-  width: 13rem;
+  width: 15rem;
   height: 70%;
   text-align: center;
   font-size: 2rem;
   font-weight: 900;
   animation: menuIcon 6s infinite;
 }
-#menuIcon span {
+#menuIcon img {
+  height: 100%;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #menuIcon svg {
   cursor: pointer;
-  color: rgb(14, 13, 13);
+  color: #312e2d;
 }
 
 /*searchbar in header */
@@ -322,11 +325,13 @@ header {
   border: 1px solid rgb(190, 184, 184);
   border-radius: 0.2rem;
 }
-#searchBar span:hover+.searchResult,.searchResult:hover{
+#searchBar span:hover + .searchResult,
+.searchResult:hover {
   display: flex;
 }
 #searchBar span input {
   text-indent: 1rem;
+  width: 85%;
 }
 #searchBar .searchIcon {
   cursor: pointer;
@@ -419,7 +424,7 @@ form {
   flex-direction: column;
   align-items: center;
   row-gap: 1rem;
-  height: 320px;
+  /*height: 320px;*/
   width: 500px;
   border-radius: 0.2rem;
 }
@@ -448,7 +453,7 @@ form div {
   justify-content: center;
   align-items: center;
   width: 80%;
-  height: 15%;
+  height: 2rem;
   border-radius: 2rem;
   border: 1px solid #ddd;
   padding: 0.1rem;
@@ -475,6 +480,14 @@ form input {
   width: 85%;
   height: 90%;
   font-size: 1rem;
+}
+form .textarea {
+  height: 15rem;
+}
+form textarea {
+  width: 85%;
+  height: 90%;
+  border: 1px solid rgb(226, 223, 219);
 }
 form button {
   margin-top: auto;
@@ -554,7 +567,7 @@ header .menu a {
   flex-direction: column;
   font-family: Lato;
   box-shadow: 0 2px 0.3rem 0.1rem rgb(199, 194, 187);
-  transition: 2s;
+  transition: 0.3s;
   transform-style: preserve-3d;
   background: white;
   pointer-events: none;
@@ -668,7 +681,7 @@ header .menu a {
   height: 58%;
   border-bottom: 1px rgb(190, 189, 189) solid;
 }
-.top a{
+.top a {
   width: 100%;
   height: 100%;
 }
@@ -677,9 +690,6 @@ header .menu a {
   height: 100%;
   pointer-events: auto;
   cursor: pointer;
-}
-.top img:hover {
-  
 }
 .bottom {
   height: 42%;
@@ -690,14 +700,24 @@ header .menu a {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0rem;
 }
-.bottom input {
-  font-size: 1.2rem;
-  font-weight: 800;
-  text-decoration: underline rgb(17, 66, 158);
-  text-indent: 2.3rem;
+.bottom span i {
+  width: 33%;
   text-align: center;
+  text-decoration: line-through;
+  text-decoration-thickness: 0.15rem;
+  font-size: 1rem;
+  font-weight: 100;
+}
+.bottom input {
+  width: 40%;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  /*text-decoration: underline rgb(17, 66, 158);*/
 }
 .bottom span {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-size: 1.2rem;
   color: rgb(56, 56, 58);
   font-weight: 700;
