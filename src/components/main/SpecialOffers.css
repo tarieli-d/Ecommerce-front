@@ -1,0 +1,87 @@
+.special-offers {
+  max-width: 92vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+  margin: auto;
+  color: white;
+  overflow: hidden;
+  padding: 1vw;
+}
+.spec-offers-title {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  margin-top: 2rem;
+  width: 100%;
+  font: 100 1.5rem fangsong;
+  background: whitesmoke;
+  box-shadow: 0 0 5px 1px rgb(163, 161, 161, 0.5);
+  color: rgb(61, 60, 60);
+}
+
+.imgSlider {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 2vw;
+  width: 100%;
+}
+.imgSlider .product .sale {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: rgb(255, 7, 7);
+  font: bold 1.3rem impact;
+  text-decoration: underline;
+  z-index: 5;
+}
+.imgSlider .product {
+  align-items: center;
+  transition: 1s;
+}
+.imgSlider .product .top {
+  height: 70%;
+  border: none;
+}
+.imgSlider .product .top a {
+  align-items: flex-start;
+  height: 100%;
+}
+.imgSlider .product .top img {
+  width: 100%;
+  border: none;
+}
+.imgSlider .product .bottom {
+  width: 90%;
+  height: 30%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.imgSlider .product .bottom button {
+  width: 2.5rem;
+  height: 2rem;
+}
+.imgSlider .product .bottom div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.2rem;
+  color: rgb(90, 90, 90);
+  width: 100%;
+  height: 70%;
+}
+.imgSlider .product .bottom > span {
+  font-size: 2em;
+  font-family: 'Courier New', Courier, monospace;
+}
+.imgSlider .product .bottom div span:nth-child(1) {
+  color: #070707;
+  font-weight: bolder;
+}
+.imgSlider .product .bottom div span:nth-child(2) {
+  margin-right: auto;
+  color: rgb(56, 55, 55);
+  text-decoration: line-through rgb(233, 31, 31);
+  font: 100 0.8rem monospace;
+}

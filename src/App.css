@@ -1,0 +1,209 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: /*rgb(214, 220, 230)*/ white;
+}
+#root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: auto;
+}
+/*cartData popup Window background overlay*/
+.overlay1,
+.overlay2 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+.overlay2 {
+  position: fixed;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#root > .overlay2 ~ .overlay2 {
+  filter: blur(5px);
+  z-index: 9;
+  background-color: rgba(247, 242, 242, 0.5);
+}
+
+/*common css*/
+.select {
+  text-align-last: center;
+  color: /*rgba(13, 120, 207)*/ rgb(255, 251, 251);
+  border: 0.1rem rgb(196, 193, 193, 0.5) solid;
+  outline: none;
+  cursor: pointer;
+  background: rgb(0 0 0 / 90%);
+  font: 1.2rem Verdana, sans-serif;
+  margin: 0;
+  padding: 0.3rem;
+}
+
+button {
+  border-radius: 0.2rem;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.3rem;
+  padding-top: 0.1rem;
+  font-size: 1.3rem;
+  background-color: rgb(49, 47, 48);
+}
+button:hover {
+  background-color: rgb(2, 179, 61);
+  cursor: pointer;
+}
+input {
+  width: 85%;
+  height: 100%;
+  font-family: Verdana, sans-serif;
+  font-size: 1.3rem;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem 0 0 0.2rem;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+
+/*for common pages,admin panel too*/
+.common-outer,
+.admin {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  row-gap: 3rem;
+  margin-top: 8rem;
+  width: 100%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+}
+
+/*contact page*/
+.contact p {
+  display: inline;
+  margin-left: 1rem;
+  word-wrap: break-word;
+}
+
+/*make website responsive*/
+@media (min-width: 1650px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, 15vw);
+    grid-auto-rows: 22vw;
+  }
+  .imgSlider {
+    font-size: calc(0.5vw+0.1vh);
+  }
+}
+@media (max-width: 1650px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, 24vw);
+    grid-auto-rows: 30vw;
+  }
+  .imgSlider {
+    grid-auto-columns: 21.5vw;
+    grid-template-rows: 29vw;
+    font-size: 0.7vw;
+  }
+}
+@media (max-width: 1050px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, 25vw);
+    grid-auto-rows: 32vw;
+  }
+}
+@media (max-width: 975px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, 27vw);
+    grid-auto-rows: 40vw;
+  }
+  .imgSlider {
+    grid-auto-columns: 29.33vw;
+    grid-template-rows: 38vw;
+    font-size: 1vw;
+  }
+}
+@media (max-width: 866px) {
+  header .menu {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .headerTop #searchBar {
+    display: none;
+  }
+  body .headerBottom #searchBar {
+    display: flex;
+  }
+  .common-inner-products {
+    flex-direction: column;
+    align-items: center;
+  }
+  .categoried {
+    align-self: center;
+    min-width: 50%;
+    height: 20rem;
+  }
+  .products {
+    min-width: 95%;
+    grid-template-columns: repeat(auto-fill, 39vw);
+    grid-template-rows: 80px;
+    grid-auto-rows: 48vw;
+  }
+  .imgSlider {
+    grid-auto-columns: 45vw;
+    grid-template-rows: 60vw;
+    font-size: 1.5vw;
+  }
+  .products .sort {
+    flex-direction: column;
+  }
+  .products .sort .select {
+    width: 100%;
+  }
+}
+@media (max-width: 560px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, 17rem);
+    grid-auto-rows: 23rem;
+  }
+  .special-offers {
+    width: 60vw;
+  }
+  .imgSlider {
+    grid-auto-columns: 60vw;
+    grid-template-rows: 75vw;
+    font-size: 1.8vw;
+  }
+  .popupWindow .close {
+    font-size: 1rem;
+  }
+  .popupWindow .cartItem .cart-product-title {
+    display: none;
+  }
+}
+@media (max-width: 420px) {
+  .headerTop .langSwitch {
+    display: none;
+  }
+  .special-offers {
+    width: 85vw;
+  }
+  .imgSlider {
+    grid-auto-columns: 85vw;
+    grid-template-rows: 100vw;
+    font-size: 2.5vw;
+  }
+}
